@@ -16,3 +16,5 @@ Route::get('/', 'Auth\AuthController@showLoginForm');
 Route::auth();
 
 Route::get('/home', 'HomeController@index');
+
+Route::resource('/users', 'UserController');
