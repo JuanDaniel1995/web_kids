@@ -4,10 +4,16 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Http\Requests;
+use App\Constants;
 use App\User;
+use Auth;
+use DB;
 
 class UserController extends Controller
 {
+    public function __construct() {
+        $this->middleware('is_admin');
+    }
     /**
      * Display a listing of the resource.
      *
@@ -15,8 +21,8 @@ class UserController extends Controller
      */
     public function index()
     {
-        $users = User::all();
-        dd($users);
+        $users = $this->getUsers();
+        return view('users/index')->with('users', $users);
     }
 
     /**
@@ -48,7 +54,8 @@ class UserController extends Controller
      */
     public function show($id)
     {
-        //
+        $user = $this->getUsers($id);
+        return view('users/show')->with('user', $user);
     }
 
     /**
@@ -59,7 +66,8 @@ class UserController extends Controller
      */
     public function edit($id)
     {
-        //
+        $user = $this->getUsers($id);
+        return view('users/edit')->with('user', $user);
     }
 
     /**
@@ -71,7 +79,14 @@ class UserController extends Controller
      */
     public function update(Request $request, $id)
     {
-        //
+        $this->validate($request, [
+            'name' => 'required|max:255',
+            'email' => 'required|email|max:255',
+            'role' => 'required',
+        ]);
+        $user = User::find($id);
+        $user->update($request->all());
+        return redirect(route('users.index'));
     }
 
     /**
@@ -82,6 +97,26 @@ class UserController extends Controller
      */
     public function destroy($id)
     {
-        //
+        try {
+          User::destroy($id);
+          return response()->json(Lang::get('main.deleteSuccess'), 200);
+        } catch(\Exception $e) {
+          return response()->json(Lang::get('main.deleteFail'), 404);
+        }
+    }
+
+    private function getUsers($id = null)
+    {
+        $sql = 'select id,
+                name,
+                email,
+                case when role = "C" then "Contribuidor" else "Padre" end as "role",
+                role as "role_value"
+                from users';
+        if ($id !== null) {
+          $sql.=' where users.id = :user_id';
+          $users = DB::select($sql, ['user_id' => $id])[0];
+        } else $users = DB::select($sql);
+        return $users;
     }
 }

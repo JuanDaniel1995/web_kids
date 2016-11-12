@@ -15,4 +15,10 @@ return [
     'send_email' => 'Envíar correo',
     'users' => 'Usuarios',
     'videos' => 'Vídeos',
+    'permissions' => 'No tienes los permisos suficientes',
+    'create' => 'Nuevo',
+    'edit' => 'Editar',
+    'delete' => 'Eliminar',
+    'deleteSuccess' => 'Registro eliminado correctamente',
+    'deleteFail' => 'No se ha podido eliminar el registro'
 ];
