@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use Illuminate\Auth\Access\AuthorizationException;
 use Illuminate\Http\Request;
 use App\Http\Requests;
 use App\Constants;
@@ -9,6 +10,7 @@ use App\Child;
 use App\User;
 use Auth;
 use DB;
+use Lang;
 
 class ChildController extends Controller implements IController
 {
@@ -49,6 +51,10 @@ class ChildController extends Controller implements IController
             'restricted_mode' => ['required', 'regex:/^(Y|N)$/'],
             'user_id' => 'required|integer',
         ]);
+        $user = User::find(Auth::user()->id);
+        if ($user->role === Constants::PARENT_ROLE && (int)$request->input('user_id') !== $user->id) {
+            throw new AuthorizationException();
+        }
         Child::create($request->all());
         return redirect(route('children.index'));
     }
@@ -62,7 +68,8 @@ class ChildController extends Controller implements IController
     public function show($id)
     {
         $child = $this->getData($id);
-        return view('children/show')->with('child', $child);
+        if ($this->isAllowed($child)) return view('children/show')->with('child', $child);
+        throw new AuthorizationException();
     }
 
     /**
@@ -74,7 +81,8 @@ class ChildController extends Controller implements IController
     public function edit($id)
     {
         $child = $this->getData($id);
-        return view('children/edit')->with('child', $child);
+        if ($this->isAllowed($child)) return view('children/edit')->with('child', $child);
+        throw new AuthorizationException();
     }
 
     /**
@@ -94,6 +102,7 @@ class ChildController extends Controller implements IController
             'user_id' => 'required|integer',
         ]);
         $child = Child::find($id);
+        if (!$this->isAllowed($child)) throw new AuthorizationException();
         $child->update($request->all());
         return redirect(route('children.index'));
     }
@@ -107,10 +116,12 @@ class ChildController extends Controller implements IController
     public function destroy($id)
     {
         try {
-          Child::destroy($id);
-          return response()->json(Lang::get('main.deleteSuccess'), 200);
+            $child = Child::find($id);
+            if (!$this->isAllowed($child)) return response()->json(Lang::get('main.permissions'), 401);
+            $child->delete();
+            return response()->json(Lang::get('main.deleteSuccess'), 200);
         } catch(\Exception $e) {
-          return response()->json(Lang::get('main.deleteFail'), 404);
+            return response()->json(Lang::get('main.deleteFail'), 404);
         }
     }
 
@@ -119,6 +130,7 @@ class ChildController extends Controller implements IController
         $sql = 'select id,
                 username,
                 birthdate,
+                user_id,
                 case when enabled_search = "E" then "Habilitado" else "Deshabilitado" end as "enabled_search",
                 case when restricted_mode = "Y" then "Habilitado" else "Deshabilitado" end as "restricted_mode",
                 enabled_search as "search_value",
@@ -129,9 +141,19 @@ class ChildController extends Controller implements IController
           $sql.=' where id = :child_id';
           $children = DB::select($sql, ['child_id' => $id])[0];
         } else if ($userRole === Constants::PARENT_ROLE) {
-            $sql.=' where user_id = :user_id';
-            $children = DB::select($sql, ['user_id' => Auth::user()->id]);
+            /*$sql.=' where user_id = :user_id';
+            $children = DB::select($sql, ['user_id' => Auth::user()->id]);*/
+            $children = DB::select($sql);
         } else if ($userRole === Constants::ADMIN_ROLE) $children = DB::select($sql);
         return $children;
+    }
+
+    private function isAllowed($child)
+    {
+        $user = User::find(Auth::user()->id);
+        if ($user->role === Constants::PARENT_ROLE && $child->user_id !== $user->id) {
+            return false;
+        }
+        return true;
     }
 }

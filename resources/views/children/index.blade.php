@@ -22,7 +22,7 @@
                         <td>{{$child->enabled_search}}</td>
                         <td>{{$child->restricted_mode}}</td>
                         <td><a href="{{route('children.edit', $child->id)}}"><span class='glyphicon glyphicon-pencil'></a></td>
-                        <td><a href="javascript:deleteUser('{{ $child->id }}');"><span class='glyphicon glyphicon-trash'></a></td>
+                        <td><a href="javascript:deleteChild('{{ $child->id }}');"><span class='glyphicon glyphicon-trash'></a></td>
                     </tr>
                 @endforeach
                 </tbody>

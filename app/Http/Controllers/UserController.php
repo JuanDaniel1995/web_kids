@@ -8,12 +8,15 @@ use App\Constants;
 use App\User;
 use Auth;
 use DB;
+use Lang;
 
 class UserController extends Controller implements IController
 {
-    public function __construct() {
+    public function __construct()
+    {
         $this->middleware('is_admin');
     }
+
     /**
      * Display a listing of the resource.
      *

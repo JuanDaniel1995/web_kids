@@ -22,7 +22,7 @@ return [
     'array'                => 'The :attribute must be an array.',
     'before'               => 'The :attribute must be a date before :date.',
     'between'              => [
-        'numeric' => 'The :attribute must be between :min and :max.',
+        'numeric' => 'El valor :attribute debe de estar en el rango de :min y :max.',
         'file'    => 'The :attribute must be between :min and :max kilobytes.',
         'string'  => 'The :attribute must be between :min and :max characters.',
         'array'   => 'The :attribute must have between :min and :max items.',
@@ -41,7 +41,7 @@ return [
     'image'                => 'The :attribute must be an image.',
     'in'                   => 'The selected :attribute is invalid.',
     'in_array'             => 'The :attribute field does not exist in :other.',
-    'integer'              => 'The :attribute must be an integer.',
+    'integer'              => 'El valor del campo :attribute debe de ser un número.',
     'ip'                   => 'The :attribute must be a valid IP address.',
     'json'                 => 'The :attribute must be a valid JSON string.',
     'max'                  => [

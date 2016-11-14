@@ -22,5 +22,6 @@ return [
     'edit' => 'Edit',
     'delete' => 'Delete',
     'deleteSuccess' => 'Row deleted successfuly',
-    'deleteFail' => 'Could not delete the row'
+    'deleteFail' => 'Could not delete the row',
+    'permissions' => 'You do not have permissions for this action.',
 ];

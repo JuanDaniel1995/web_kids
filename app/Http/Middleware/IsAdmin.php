@@ -22,7 +22,7 @@ class IsAdmin
     {
         $userRole = User::find(Auth::user()->id)->role;
         if ($userRole === Constants::ADMIN_ROLE) return $next($request);
-        if ($request->ajax()) return response()->json(Lang::get('main.permissions'), 404);
+        if ($request->ajax()) return response()->json(Lang::get('main.permissions'), 401);
         throw new AuthorizationException();
     }
 }

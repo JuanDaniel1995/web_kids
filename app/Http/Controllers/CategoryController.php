@@ -8,9 +8,16 @@ use App\Constants;
 use App\Category;
 use Auth;
 use DB;
+use Lang;
 
 class CategoryController extends Controller implements IController
 {
+
+    public function __construct()
+    {
+        $this->middleware('is_admin')->except('index');
+    }
+
     /**
      * Display a listing of the resource.
      *
@@ -57,7 +64,8 @@ class CategoryController extends Controller implements IController
      */
     public function show($id)
     {
-        //
+        $category = $this->getData($id);
+        return view('categories/show')->with('category', $category);
     }
 
     /**
@@ -68,7 +76,8 @@ class CategoryController extends Controller implements IController
      */
     public function edit($id)
     {
-        //
+        $category = $this->getData($id);
+        return view('categories/edit')->with('category', $category);
     }
 
     /**
@@ -80,7 +89,14 @@ class CategoryController extends Controller implements IController
      */
     public function update(Request $request, $id)
     {
-        //
+        $this->validate($request, [
+            'name' => 'required|string|max:255',
+            'description' => 'required|max:255|string',
+            'minimum_age' => 'required|integer|between:1,100',
+        ]);
+        $category = Category::find($id);
+        $category->update($request->all());
+        return redirect(route('categories.index'));
     }
 
     /**
@@ -91,7 +107,12 @@ class CategoryController extends Controller implements IController
      */
     public function destroy($id)
     {
-        //
+        try {
+          Category::destroy($id);
+          return response()->json(Lang::get('main.deleteSuccess'), 200);
+        } catch(\Exception $e) {
+          return response()->json(Lang::get('main.deleteFail'), 404);
+        }
     }
 
     public function getData($id = null)

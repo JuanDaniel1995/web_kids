@@ -20,7 +20,7 @@
                         <td>{{$category->description}}</td>
                         <td>{{$category->minimum_age}}</td>
                         <td><a href="{{route('categories.edit', $category->id)}}"><span class='glyphicon glyphicon-pencil'></a></td>
-                        <td><a href="javascript:deleteUser('{{ $category->id }}');"><span class='glyphicon glyphicon-trash'></a></td>
+                        <td><a href="javascript:deleteCategory('{{ $category->id }}');"><span class='glyphicon glyphicon-trash'></a></td>
                     </tr>
                 @endforeach
                 </tbody>
