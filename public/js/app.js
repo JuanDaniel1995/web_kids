@@ -45,3 +45,19 @@ function deleteCategory(id) {
         });
     }
 }
+
+function deleteTag(id) {
+    if (confirm('¿Desea continuar?')) {
+        $.ajax({
+        type: 'DELETE',
+        url: '/tags/' + id,
+        headers: {
+            'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+        }
+        }).done(function(data) {
+            window.location.reload();
+        }).fail(function(data) {
+            toastr.error(data.responseText);
+        });
+    }
+}

@@ -16,6 +16,7 @@ return [
     'users' => 'Usuarios',
     'children' => 'Hijos',
     'categories' => 'Categorías',
+    'tags' => 'Etiquetas',
     'videos' => 'Vídeos',
     'permissions' => 'No tienes los permisos suficientes',
     'create' => 'Nuevo',

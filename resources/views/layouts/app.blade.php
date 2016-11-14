@@ -62,6 +62,15 @@
                             <li><a href="{{route('categories.create')}}"><i class="fa fa-btn fa-plus"></i> {{trans('main.create')}}</a></li>
                         </ul>
                     </li>
+                    <li class="dropdown">
+                        <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">
+                            {{trans('main.tags')}} <span class="caret"></span>
+                        </a>
+                        <ul class="dropdown-menu" role="menu">
+                            <li><a href="{{route('tags.index')}}"><i class="fa fa-btn fa-user"></i> {{trans('main.tags')}}</a></li>
+                            <li><a href="{{route('tags.create')}}"><i class="fa fa-btn fa-plus"></i> {{trans('main.create')}}</a></li>
+                        </ul>
+                    </li>
                 </ul>
             @endif
 
