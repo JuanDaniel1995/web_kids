@@ -19,4 +19,5 @@ Route::get('/home', 'HomeController@index');
 
 Route::group(['middleware' => 'auth'], function () {
     Route::resource('/users', 'UserController', ['except' => ['store', 'create']]);
+    Route::resource('/children', 'ChildController');
 });

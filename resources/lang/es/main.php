@@ -4,7 +4,7 @@ return [
 
     'login' => 'Iniciar sesión',
     'logout' => 'Cerrar sesión',
-    'register' => 'Registrarse',
+    'register' => 'Registrar',
     'email' => 'Correo eléctronico',
     'password' => 'Contraseña',
     'remember' => 'Recordarme',
@@ -14,11 +14,12 @@ return [
     'reset_password' => 'Reestablecer contraseña',
     'send_email' => 'Envíar correo',
     'users' => 'Usuarios',
+    'children' => 'Hijos',
     'videos' => 'Vídeos',
     'permissions' => 'No tienes los permisos suficientes',
     'create' => 'Nuevo',
     'edit' => 'Editar',
     'delete' => 'Eliminar',
     'deleteSuccess' => 'Registro eliminado correctamente',
-    'deleteFail' => 'No se ha podido eliminar el registro'
+    'deleteFail' => 'No se ha podido eliminar el registro',
 ];

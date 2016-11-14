@@ -29,20 +29,26 @@
                     <span class="icon-bar"></span>
                 </button>
 
-                <!-- Branding Image -->
             </div>
             @if (!Auth::guest())
             <div class="collapse navbar-collapse" id="app-navbar-collapse">
                 <!-- Left Side Of Navbar -->
                 <ul class="nav navbar-nav">
-                    <li><a href="{{ url('/home') }}">{{trans('main.home')}}</a></li>
                     <li class="dropdown">
                         <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">
                             {{trans('main.users')}} <span class="caret"></span>
                         </a>
                         <ul class="dropdown-menu" role="menu">
                             <li><a href="{{route('users.index')}}"><i class="fa fa-btn fa-user"></i> {{trans('main.users')}}</a></li>
-                            <!--<li><a href="{{route('users.index')}}"><i class="fa fa-btn fa-plus"></i> {{trans('main.create')}}</a></li>-->
+                        </ul>
+                    </li>
+                    <li class="dropdown">
+                        <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">
+                            {{trans('main.children')}} <span class="caret"></span>
+                        </a>
+                        <ul class="dropdown-menu" role="menu">
+                            <li><a href="{{route('children.index')}}"><i class="fa fa-btn fa-user"></i> {{trans('main.children')}}</a></li>
+                            <li><a href="{{route('children.create')}}"><i class="fa fa-btn fa-plus"></i> {{trans('main.create')}}</a></li>
                         </ul>
                     </li>
                 </ul>

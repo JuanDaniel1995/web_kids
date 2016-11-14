@@ -39,11 +39,10 @@
 
                         <div class="form-group{{ $errors->has('role') ? ' has-error' : '' }}">
                             <label for="role" class="col-md-4 control-label">{{trans('users.role')}}</label>
-
                             <div class="col-md-6">
                                 <select id="role" name="role" class="selectpicker">
-                                    <option selected="{{$user->role_value == 'C' ? 'selected' : ''}}" value="C">{{trans('users.admin')}}</option>
-                                    <option selected="{{$user->role_value == 'P' ? 'selected' : ''}}" value="P">{{trans('users.parent')}}</option>
+                                    <option {{$user->role_value == 'C' ? 'selected' : ''}} value="C">{{trans('users.admin')}}</option>
+                                    <option {{$user->role_value == 'P' ? 'selected' : ''}} value="P">{{trans('users.parent')}}</option>
                                 </select>
 
                                 @if ($errors->has('role'))

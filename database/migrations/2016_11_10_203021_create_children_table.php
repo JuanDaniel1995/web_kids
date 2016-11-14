@@ -12,7 +12,7 @@ class CreateChildrensTable extends Migration
      */
     public function up()
     {
-        Schema::create('childrens', function (Blueprint $table) {
+        Schema::create('children', function (Blueprint $table) {
             $table->increments('id');
             $table->string('username')->unique();
             $table->string('password');
@@ -32,6 +32,6 @@ class CreateChildrensTable extends Migration
      */
     public function down()
     {
-        Schema::drop('childrens');
+        Schema::drop('children');
     }
 }

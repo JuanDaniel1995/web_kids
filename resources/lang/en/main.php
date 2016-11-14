@@ -14,6 +14,7 @@ return [
     'reset_password' => 'Reset password',
     'send_email' => 'Reset password',
     'users' => 'Users',
+    'children' => 'Children',
     'videos' => 'Videos',
     'permissions' => 'You do not have enough permissions',
     'create' => 'Create',
