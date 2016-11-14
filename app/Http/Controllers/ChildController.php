@@ -10,7 +10,7 @@ use App\User;
 use Auth;
 use DB;
 
-class ChildController extends Controller
+class ChildController extends Controller implements IController
 {
     /**
      * Display a listing of the resource.
@@ -19,7 +19,7 @@ class ChildController extends Controller
      */
     public function index()
     {
-        $children = $this->getChildren();
+        $children = $this->getData();
         return view('children/index')->with('children', $children);
     }
 
@@ -47,6 +47,7 @@ class ChildController extends Controller
             'password' => 'required|confirmed',
             'enabled_search' => ['required', 'regex:/^(E|D)$/'],
             'restricted_mode' => ['required', 'regex:/^(Y|N)$/'],
+            'user_id' => 'required|integer',
         ]);
         Child::create($request->all());
         return redirect(route('children.index'));
@@ -60,7 +61,7 @@ class ChildController extends Controller
      */
     public function show($id)
     {
-        $child = $this->getChildren($id);
+        $child = $this->getData($id);
         return view('children/show')->with('child', $child);
     }
 
@@ -72,7 +73,7 @@ class ChildController extends Controller
      */
     public function edit($id)
     {
-        $child = $this->getChildren($id);
+        $child = $this->getData($id);
         return view('children/edit')->with('child', $child);
     }
 
@@ -113,7 +114,7 @@ class ChildController extends Controller
         }
     }
 
-    private function getChildren($id = null)
+    public function getData($id = null)
     {
         $sql = 'select id,
                 username,

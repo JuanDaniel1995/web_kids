@@ -9,7 +9,7 @@ use App\User;
 use Auth;
 use DB;
 
-class UserController extends Controller
+class UserController extends Controller implements IController
 {
     public function __construct() {
         $this->middleware('is_admin');
@@ -21,7 +21,7 @@ class UserController extends Controller
      */
     public function index()
     {
-        $users = $this->getUsers();
+        $users = $this->getData();
         return view('users/index')->with('users', $users);
     }
 
@@ -54,7 +54,7 @@ class UserController extends Controller
      */
     public function show($id)
     {
-        $user = $this->getUsers($id);
+        $user = $this->getData($id);
         return view('users/show')->with('user', $user);
     }
 
@@ -66,7 +66,7 @@ class UserController extends Controller
      */
     public function edit($id)
     {
-        $user = $this->getUsers($id);
+        $user = $this->getData($id);
         return view('users/edit')->with('user', $user);
     }
 
@@ -105,7 +105,7 @@ class UserController extends Controller
         }
     }
 
-    private function getUsers($id = null)
+    public function getData($id = null)
     {
         $sql = 'select id,
                 name,

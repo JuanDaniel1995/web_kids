@@ -15,6 +15,7 @@ return [
     'send_email' => 'Envíar correo',
     'users' => 'Usuarios',
     'children' => 'Hijos',
+    'categories' => 'Categorías',
     'videos' => 'Vídeos',
     'permissions' => 'No tienes los permisos suficientes',
     'create' => 'Nuevo',
