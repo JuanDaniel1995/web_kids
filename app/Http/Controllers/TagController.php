@@ -60,7 +60,8 @@ class TagController extends Controller implements IController
      */
     public function show($id)
     {
-        //
+        $tag = $this->getData($id);
+        return view('tags/show')->with('tag', $tag);
     }
 
     /**
@@ -71,7 +72,8 @@ class TagController extends Controller implements IController
      */
     public function edit($id)
     {
-        //
+        $tag = $this->getData($id);
+        return view('tags/edit')->with('tag', $tag);
     }
 
     /**
@@ -83,7 +85,12 @@ class TagController extends Controller implements IController
      */
     public function update(Request $request, $id)
     {
-        //
+        $this->validate($request, [
+            'description' => 'required|max:255|string',
+        ]);
+        $tag = Tag::find($id);
+        $tag->update($request->all());
+        return redirect(route('tags.index'));
     }
 
     /**
