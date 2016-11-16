@@ -25,4 +25,5 @@ return [
     'deleteSuccess' => 'Registro eliminado correctamente',
     'deleteFail' => 'No se ha podido eliminar el registro',
     'permissions' => 'No tiene permisos para esta accion',
+    'default' => 'Seleccione una opción',
 ];

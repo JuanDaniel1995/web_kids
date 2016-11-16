@@ -25,4 +25,5 @@ return [
     'deleteSuccess' => 'Row deleted successfuly',
     'deleteFail' => 'Could not delete the row',
     'permissions' => 'You do not have permissions for this action.',
+    'default' => 'Select an option',
 ];

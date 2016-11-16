@@ -20,7 +20,7 @@
                         <td>{{$video->url}}</td>
                         <td>{{$video->category}}</td>
                         <td><a href="{{route('videos.edit', $video->id)}}"><span class='glyphicon glyphicon-pencil'></a></td>
-                        <td><a href="javascript:deleteUser('{{ $video->id }}');"><span class='glyphicon glyphicon-trash'></a></td>
+                        <td><a href="javascript:deleteVideo('{{ $video->id }}');"><span class='glyphicon glyphicon-trash'></a></td>
                     </tr>
                 @endforeach
                 </tbody>

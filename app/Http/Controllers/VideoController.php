@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Http\Requests;
+use App\Category;
 use App\Video;
 use Auth;
 use DB;
@@ -34,7 +35,8 @@ class VideoController extends Controller implements IController
      */
     public function create()
     {
-        //
+        $categories = Category::all();
+        return view('videos/create')->with('categories', $categories);
     }
 
     /**
@@ -45,7 +47,13 @@ class VideoController extends Controller implements IController
      */
     public function store(Request $request)
     {
-        //
+        $this->validate($request, [
+            'description' => 'required|max:255|string|unique:videos',
+            'url' => ['required', 'max:255', 'string', 'regex:/^((https?):\/\/www\.)(([a-z0-9]([-a-z0-9]*[a-z0-9]+)?){1,63}\.)+[a-z]{2,6}/'],
+            'category_id' => 'required|integer|exists:categories,id'
+        ]);
+        Video::create($request->all());
+        return redirect(route('videos.index'));
     }
 
     /**
@@ -68,7 +76,9 @@ class VideoController extends Controller implements IController
      */
     public function edit($id)
     {
-        //
+        $categories = Category::all();
+        $video = $this->getData($id);
+        return view('videos/edit')->with('video', $video)->with('categories', $categories);
     }
 
     /**
@@ -80,7 +90,14 @@ class VideoController extends Controller implements IController
      */
     public function update(Request $request, $id)
     {
-        //
+        $this->validate($request, [
+            'description' => 'required|max:255|string',
+            'url' => ['required', 'max:255', 'string', 'regex:/^((https?):\/\/www\.)(([a-z0-9]([-a-z0-9]*[a-z0-9]+)?){1,63}\.)+[a-z]{2,6}/'],
+            'category_id' => 'required|integer|exists:categories,id'
+        ]);
+        $video = Video::find($id);
+        $video->update($request->all());
+        return redirect(route('videos.index'));
     }
 
     /**
@@ -91,7 +108,12 @@ class VideoController extends Controller implements IController
      */
     public function destroy($id)
     {
-        //
+        try {
+          Video::destroy($id);
+          return response()->json(Lang::get('main.deleteSuccess'), 200);
+        } catch(\Exception $e) {
+          return response()->json(Lang::get('main.deleteFail'), 404);
+        }
     }
 
     public function getData($id = null)
@@ -101,7 +123,7 @@ class VideoController extends Controller implements IController
             videos.url,
             categories.name as category
             from videos
-                inner join categories
+                left join categories
                 on categories.id = videos.category_id';
         if ($id !== null) {
           $sql.=' where videos.id = :video_id';

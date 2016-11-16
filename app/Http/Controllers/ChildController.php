@@ -49,7 +49,7 @@ class ChildController extends Controller implements IController
             'password' => 'required|confirmed',
             'enabled_search' => ['required', 'regex:/^(E|D)$/'],
             'restricted_mode' => ['required', 'regex:/^(Y|N)$/'],
-            'user_id' => 'required|integer',
+            'user_id' => 'required|integer|exists:users,id',
         ]);
         $user = User::find(Auth::user()->id);
         if ($user->role === Constants::PARENT_ROLE && (int)$request->input('user_id') !== $user->id) {

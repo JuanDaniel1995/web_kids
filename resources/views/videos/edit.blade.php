@@ -5,16 +5,17 @@
     <div class="row">
         <div class="col-md-8 col-md-offset-2">
             <div class="panel panel-default">
-                <div class="panel-heading">{{trans('videos.new')}}</div>
+                <div class="panel-heading">{{trans('main.edit')}}</div>
                 <div class="panel-body">
-                    <form class="form-horizontal" role="form" method="POST" action="{{route('videos.store')}}">
+                    <form class="form-horizontal" role="form" method="POST" action="{{route('videos.update', $video->id)}}">
                         {{ csrf_field() }}
+                        <input type='hidden' name='_method' value='PUT'>
 
                         <div class="form-group{{ $errors->has('description') ? ' has-error' : '' }}">
-                            <label for="description" class="col-md-4 control-label">{{trans('categories.description')}}</label>
+                            <label for="description" class="col-md-4 control-label">{{trans('videos.description')}}</label>
 
                             <div class="col-md-6">
-                                <input id="description" type="text" class="form-control" name="description" value="{{ old('description') }}">
+                                <input id="description" type="text" class="form-control" name="description" value="{{ $errors->has('description') ? old('description') : $video->description }}">
 
                                 @if ($errors->has('description'))
                                     <span class="help-block">
@@ -28,7 +29,7 @@
                             <label for="url" class="col-md-4 control-label">{{trans('videos.url')}}</label>
 
                             <div class="col-md-6">
-                                <input id="url" type="text" class="form-control" name="url" value="{{ old('url') }}">
+                                <input id="url" type="text" class="form-control" name="url" value="{{ $errors->has('url') ? old('url') : $video->url }}">
 
                                 @if ($errors->has('url'))
                                     <span class="help-block">
@@ -44,7 +45,7 @@
                             <div class="col-md-6">
                                 <select id="category_id" name="category_id" class="selectpicker">
                                     @foreach($categories as $category)
-                                        <option value="{{$category->id}}">{{$category->name}}</option>
+                                        <option {{$category->name == $video->category ? 'selected' : ''}} value="{{$category->id}}">{{$category->name}}</option>
                                     @endforeach
                                 </select>
 
@@ -59,7 +60,7 @@
                         <div class="form-group">
                             <div class="col-md-6 col-md-offset-4">
                                 <button type="submit" class="btn btn-primary">
-                                    <i class="fa fa-btn fa-user"></i> {{trans('main.register')}}
+                                    <i class="fa fa-btn fa-user"></i> {{trans('main.edit')}}
                                 </button>
                             </div>
                         </div>
