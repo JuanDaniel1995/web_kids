@@ -2,9 +2,9 @@
 
 return [
 
-    'description' => 'Descripcion',
+    'description' => 'Descripción',
     'url' => 'Enlace',
-    'category' => 'Categoria',
+    'category' => 'Categoría',
     'new' => 'Nuevo video',
 ];
 

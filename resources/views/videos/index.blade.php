@@ -16,9 +16,9 @@
                 <tbody>
                 @foreach($videos as $video)
                     <tr>
-                        <td><a href="{{route('videos.show', $video->id)}}">{{$video->name}}</a></td>
-                        <td>{{$video->email}}</td>
-                        <td>{{$video->role}}</td>
+                        <td><a href="{{route('videos.show', $video->id)}}">{{$video->description}}</a></td>
+                        <td>{{$video->url}}</td>
+                        <td>{{$video->category}}</td>
                         <td><a href="{{route('videos.edit', $video->id)}}"><span class='glyphicon glyphicon-pencil'></a></td>
                         <td><a href="javascript:deleteUser('{{ $video->id }}');"><span class='glyphicon glyphicon-trash'></a></td>
                     </tr>

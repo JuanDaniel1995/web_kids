@@ -3,13 +3,11 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
-
+use App\Http\Requests;
 use App\Video;
 use Auth;
 use DB;
 use Lang;
-
-use App\Http\Requests;
 
 class VideoController extends Controller implements IController
 {
@@ -25,7 +23,7 @@ class VideoController extends Controller implements IController
      */
     public function index()
     {
-        $videos=$this->getData();
+        $videos = $this->getData();
         return view('videos/index')->with('videos', $videos);;
     }
 
@@ -58,7 +56,8 @@ class VideoController extends Controller implements IController
      */
     public function show($id)
     {
-        //
+        $video = $this->getData($id);
+        return view('videos/show')->with('video', $video);
     }
 
     /**
@@ -97,12 +96,15 @@ class VideoController extends Controller implements IController
 
     public function getData($id = null)
     {
-        $sql = 'select id,
-            description,
-            url
-            from videos';
+        $sql = 'select videos.id,
+            videos.description,
+            videos.url,
+            categories.name as category
+            from videos
+                inner join categories
+                on categories.id = videos.category_id';
         if ($id !== null) {
-          $sql.=' where id = :video_id';
+          $sql.=' where videos.id = :video_id';
           $videos = DB::select($sql, ['video_id' => $id])[0];
         } else $videos = DB::select($sql);
         return $videos;

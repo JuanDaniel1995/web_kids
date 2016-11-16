@@ -76,7 +76,8 @@
                             {{trans('main.videos')}} <span class="caret"></span>
                         </a>
                         <ul class="dropdown-menu" role="menu">
-                            <li><a href="{{route('users.index')}}"><i class="fa fa-btn fa-user"></i> {{trans('main.videos')}}</a></li>
+                            <li><a href="{{route('videos.index')}}"><i class="fa fa-btn fa-user"></i> {{trans('main.videos')}}</a></li>
+                            <li><a href="{{route('videos.create')}}"><i class="fa fa-btn fa-plus"></i> {{trans('main.create')}}</a></li>
                         </ul>
                     </li>
                 </ul>
