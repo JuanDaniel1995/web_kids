@@ -22,4 +22,5 @@ Route::group(['middleware' => 'auth'], function () {
     Route::resource('/children', 'ChildController');
     Route::resource('/categories', 'CategoryController');
     Route::resource('/tags', 'TagController');
+    Route::resource('/videos', 'VideoController');
 });
