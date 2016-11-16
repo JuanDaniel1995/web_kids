@@ -15,7 +15,7 @@ class CreateChildrenPlaylistTable extends Migration
         Schema::create('children_playlist', function (Blueprint $table) {
             $table->increments('id');
             $table->integer('children_id')->unsigned();
-            $table->foreign('children_id')->references('id')->on('childrens');
+            $table->foreign('children_id')->references('id')->on('children');
             $table->integer('playlist_id')->unsigned();
             $table->foreign('playlist_id')->references('id')->on('playlists');
             $table->unique(array('children_id', 'playlist_id'));
