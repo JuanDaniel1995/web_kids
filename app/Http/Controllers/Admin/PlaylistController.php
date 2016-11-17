@@ -20,8 +20,8 @@ class PlaylistController extends Controller implements IController
      */
     public function index()
     {
-        $tags = $this->getData();
-        return view('admin/tags/index')->with('tags', $tags);
+        $playlists = $this->getData();
+        return view('admin/playlists/index')->with('playlists', $playlists);
     }
 
     /**
@@ -53,7 +53,8 @@ class PlaylistController extends Controller implements IController
      */
     public function show($id)
     {
-        //
+        $playlist = $this->getData($id);
+        return view('admin/playlists/show')->with('playlist', $playlist);
     }
 
     /**
@@ -91,9 +92,9 @@ class PlaylistController extends Controller implements IController
     }
     public function getData($id = null)
     {
-        $sql = 'select p.id, p.description, p.public, u.name, p.created_at, p.updated_at
-    FROM public.playlists p, users u
-    where p.user_id=u.id;';
+        $sql = 'select p.id, p.description, p.public, u.name as user
+        FROM public.playlists p, users u
+        where p.user_id=u.id;';
         if ($id !== null) {
           $sql.=' where p.id = :playlist';
           $tags = DB::select($sql, ['playlist' => $id])[0];
