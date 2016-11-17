@@ -2,14 +2,14 @@
 
 return [
 
-    'username' => 'User name',
+    'username' => 'User',
     'birthdate' => 'Birthdate',
     'enabled_search' => 'Search',
     'restricted_mode' => 'Restricted mode',
     'new' => 'Register child',
-    'enabled_search' => [
-        'enabled' => 'Enable',
-        'disabled' => 'Disable'
+    'search' => [
+        'true' => 'Enable',
+        'false' => 'Disable'
     ],
     'restricted' => [
         'true' => 'Enable',
