@@ -92,13 +92,16 @@ class PlaylistController extends Controller implements IController
     }
     public function getData($id = null)
     {
-        $sql = 'select p.id, p.description, p.public, u.name as user
-        FROM public.playlists p, users u
-        where p.user_id=u.id;';
+        $sql = 'select playlists.id,
+            playlists.description,
+            case when playlists.public = "Y" then "Público" else "Privado" end as "public",
+            users.name as user
+        FROM playlists
+            inner join users on users.id = playlists.user_id;';
         if ($id !== null) {
           $sql.=' where p.id = :playlist';
-          $tags = DB::select($sql, ['playlist' => $id])[0];
-        } else $tags = DB::select($sql);
-        return $tags;
+          $playlists = DB::select($sql, ['playlist' => $id])[0];
+        } else $playlists = DB::select($sql);
+        return $playlists;
     }
 }
