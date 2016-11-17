@@ -26,4 +26,5 @@ return [
     'deleteFail' => 'Could not delete the row',
     'permissions' => 'You do not have permissions for this action.',
     'default' => 'Select an option',
+    'username' => 'User',
 ];

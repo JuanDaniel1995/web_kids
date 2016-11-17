@@ -2,7 +2,7 @@ function deleteUser(id) {
     if (confirm('¿Desea continuar?')) {
         $.ajax({
         type: 'DELETE',
-        url: '/users/' + id,
+        url: '/admin/users/' + id,
         headers: {
             'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
         }
@@ -18,7 +18,7 @@ function deleteChild(id) {
     if (confirm('¿Desea continuar?')) {
         $.ajax({
         type: 'DELETE',
-        url: '/children/' + id,
+        url: '/admin/children/' + id,
         headers: {
             'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
         }
@@ -34,7 +34,7 @@ function deleteCategory(id) {
     if (confirm('¿Desea continuar?')) {
         $.ajax({
         type: 'DELETE',
-        url: '/categories/' + id,
+        url: '/admin/categories/' + id,
         headers: {
             'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
         }
@@ -50,7 +50,7 @@ function deleteTag(id) {
     if (confirm('¿Desea continuar?')) {
         $.ajax({
         type: 'DELETE',
-        url: '/tags/' + id,
+        url: '/admin/tags/' + id,
         headers: {
             'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
         }
@@ -66,7 +66,7 @@ function deleteVideo(id) {
     if (confirm('¿Desea continuar?')) {
         $.ajax({
         type: 'DELETE',
-        url: '/videos/' + id,
+        url: '/admin/videos/' + id,
         headers: {
             'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
         }

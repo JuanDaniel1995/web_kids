@@ -41,7 +41,7 @@
                             {{trans('main.users')}} <span class="caret"></span>
                         </a>
                         <ul class="dropdown-menu" role="menu">
-                            <li><a href="{{route('users.index')}}"><i class="fa fa-btn fa-user"></i> {{trans('main.users')}}</a></li>
+                            <li><a href="{{route('admin.users.index')}}"><i class="fa fa-btn fa-user"></i> {{trans('main.users')}}</a></li>
                         </ul>
                     </li>
                     <li class="dropdown">
@@ -49,8 +49,8 @@
                             {{trans('main.children')}} <span class="caret"></span>
                         </a>
                         <ul class="dropdown-menu" role="menu">
-                            <li><a href="{{route('children.index')}}"><i class="fa fa-btn fa-user"></i> {{trans('main.children')}}</a></li>
-                            <li><a href="{{route('children.create')}}"><i class="fa fa-btn fa-plus"></i> {{trans('main.create')}}</a></li>
+                            <li><a href="{{route('admin.children.index')}}"><i class="fa fa-btn fa-user"></i> {{trans('main.children')}}</a></li>
+                            <li><a href="{{route('admin.children.create')}}"><i class="fa fa-btn fa-plus"></i> {{trans('main.create')}}</a></li>
                         </ul>
                     </li>
                     <li class="dropdown">
@@ -58,8 +58,8 @@
                             {{trans('main.categories')}} <span class="caret"></span>
                         </a>
                         <ul class="dropdown-menu" role="menu">
-                            <li><a href="{{route('categories.index')}}"><i class="fa fa-btn fa-user"></i> {{trans('main.categories')}}</a></li>
-                            <li><a href="{{route('categories.create')}}"><i class="fa fa-btn fa-plus"></i> {{trans('main.create')}}</a></li>
+                            <li><a href="{{route('admin.categories.index')}}"><i class="fa fa-btn fa-user"></i> {{trans('main.categories')}}</a></li>
+                            <li><a href="{{route('admin.categories.create')}}"><i class="fa fa-btn fa-plus"></i> {{trans('main.create')}}</a></li>
                         </ul>
                     </li>
                     <li class="dropdown">
@@ -67,8 +67,8 @@
                             {{trans('main.tags')}} <span class="caret"></span>
                         </a>
                         <ul class="dropdown-menu" role="menu">
-                            <li><a href="{{route('tags.index')}}"><i class="fa fa-btn fa-user"></i> {{trans('main.tags')}}</a></li>
-                            <li><a href="{{route('tags.create')}}"><i class="fa fa-btn fa-plus"></i> {{trans('main.create')}}</a></li>
+                            <li><a href="{{route('admin.tags.index')}}"><i class="fa fa-btn fa-user"></i> {{trans('main.tags')}}</a></li>
+                            <li><a href="{{route('admin.tags.create')}}"><i class="fa fa-btn fa-plus"></i> {{trans('main.create')}}</a></li>
                         </ul>
                     </li>
                      <li class="dropdown">
@@ -76,8 +76,8 @@
                             {{trans('main.videos')}} <span class="caret"></span>
                         </a>
                         <ul class="dropdown-menu" role="menu">
-                            <li><a href="{{route('videos.index')}}"><i class="fa fa-btn fa-user"></i> {{trans('main.videos')}}</a></li>
-                            <li><a href="{{route('videos.create')}}"><i class="fa fa-btn fa-plus"></i> {{trans('main.create')}}</a></li>
+                            <li><a href="{{route('admin.videos.index')}}"><i class="fa fa-btn fa-user"></i> {{trans('main.videos')}}</a></li>
+                            <li><a href="{{route('admin.videos.create')}}"><i class="fa fa-btn fa-plus"></i> {{trans('main.create')}}</a></li>
                         </ul>
                     </li>
                 </ul>
@@ -87,8 +87,8 @@
                 <ul class="nav navbar-nav navbar-right">
                     <!-- Authentication Links -->
                     @if (Auth::guest())
-                        <li><a href="{{ url('/login') }}">{{trans('main.login')}}</a></li>
-                        <li><a href="{{ url('/register') }}">{{trans('main.register')}}</a></li>
+                        <li><a href="{{ url('/admin/login') }}">{{trans('main.login')}}</a></li>
+                        <li><a href="{{ url('/admin/register') }}">{{trans('main.register')}}</a></li>
                     @else
                         <li class="dropdown">
                             <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">
@@ -96,7 +96,7 @@
                             </a>
 
                             <ul class="dropdown-menu" role="menu">
-                                <li><a href="{{ url('/logout') }}"><i class="fa fa-btn fa-sign-out"></i>{{trans('main.logout')}}</a></li>
+                                <li><a href="{{ url('/admin/logout') }}"><i class="fa fa-btn fa-sign-out"></i>{{trans('main.logout')}}</a></li>
                             </ul>
                         </li>
                     @endif

@@ -11,14 +11,33 @@
 |
 */
 
-Route::get('/', 'HomeController@index');
+Route::group(['prefix' => 'admin'], function () {
+    Route::get('/', 'Admin\HomeController@index');
+    Route::get('/login', 'Admin\Auth\AuthController@showLoginForm');
+    Route::post('/login', 'Admin\Auth\AuthController@login');
+    Route::get('/logout', 'Admin\Auth\AuthController@logout');
+    Route::post('/password/email', 'Admin\Auth\PasswordController@sendResetLinkEmail');
+    Route::post('/password/reset', 'Admin\Auth\PasswordController@reset');
+    Route::get('/password/reset/{token?}', 'Admin\Auth\PasswordController@showResetForm');
+    Route::get('/register', 'Admin\Auth\AuthController@showRegistrationForm');
+    Route::post('/register', 'Admin\Auth\AuthController@register');
+    Route::group(['middleware' => 'auth'], function () {
+        Route::resource('/users', 'Admin\UserController', ['except' => ['store', 'create']]);
+        Route::resource('/children', 'Admin\ChildController');
+        Route::resource('/categories', 'Admin\CategoryController');
+        Route::resource('/tags', 'Admin\TagController');
+        Route::resource('/videos', 'Admin\VideoController');
+    });
+});
 
-Route::auth();
-
-Route::group(['middleware' => 'auth'], function () {
-    Route::resource('/users', 'UserController', ['except' => ['store', 'create']]);
-    Route::resource('/children', 'ChildController');
-    Route::resource('/categories', 'CategoryController');
-    Route::resource('/tags', 'TagController');
-    Route::resource('/videos', 'VideoController');
+Route::group(['prefix' => 'child'], function () {
+    Route::get('/', 'Child\HomeController@index');
+    Route::get('/login', 'Child\Auth\AuthController@showLoginForm');
+    Route::post('/login', 'Child\Auth\AuthController@login');
+    Route::get('/logout', 'Child\Auth\AuthController@logout');
+    Route::post('/password/email', 'Child\Auth\PasswordController@sendResetLinkEmail');
+    Route::post('/password/reset', 'Child\Auth\PasswordController@reset');
+    Route::get('/password/reset/{token?}', 'Admin\Auth\PasswordController@showResetForm');
+    Route::group(['middleware' => 'auth'], function () {
+    });
 });

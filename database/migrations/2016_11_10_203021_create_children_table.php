@@ -19,6 +19,7 @@ class CreateChildrenTable extends Migration
             $table->date('birthdate');
             $table->enum('enabled_search', array('E', 'D'));
             $table->enum('restricted_mode', array('Y', 'N'));
+            $table->rememberToken();
             $table->integer('user_id')->unsigned();
             $table->foreign('user_id')->references('id')->on('users');
             $table->timestamps();
