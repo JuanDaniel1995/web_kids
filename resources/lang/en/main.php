@@ -18,6 +18,7 @@ return [
     'categories' => 'Categories',
     'tags' => 'Tags',
     'videos' => 'Videos',
+    'seeVideos' => 'Explore videos',
     'permissions' => 'You do not have enough permissions',
     'create' => 'Create',
     'edit' => 'Edit',
@@ -28,4 +29,7 @@ return [
     'default' => 'Select an option',
     'username' => 'User',
     'playlist' => 'Playlist',
+    'search' => 'Search...',
+    'appSlogan' => 'Web Kids, a safe place to see videos.',
+    'appDescription' => 'Web Kids allows you to see playlists or videos that your father allow you to see.',
 ];

@@ -17,7 +17,8 @@ return [
     'children' => 'Hijos',
     'categories' => 'Categorías',
     'tags' => 'Etiquetas',
-    'videos' => 'Vídeos',
+    'videos' => 'Videos',
+    'seeVideos' => 'Explorar videos',
     'permissions' => 'No tienes los permisos suficientes',
     'create' => 'Nuevo',
     'edit' => 'Editar',
@@ -27,4 +28,7 @@ return [
     'permissions' => 'No tiene permisos para esta accion',
     'default' => 'Seleccione una opción',
     'username' => 'Usuario',
+    'search' => 'Buscar...',
+    'appSlogan' => 'Web Kids, un lugar seguro para ver videos.',
+    'appDescription' => 'Web Kids te permite ver listas de reproducción o videos que tus padres te permitan ver.',
 ];

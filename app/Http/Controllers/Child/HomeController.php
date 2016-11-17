@@ -5,6 +5,7 @@ namespace App\Http\Controllers\Child;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use App\Http\Requests;
+use App\Video;
 use Auth;
 
 class HomeController extends Controller
@@ -27,6 +28,7 @@ class HomeController extends Controller
      */
     public function index()
     {
-        return view('child/home');
+        $videos = Video::all();
+        return view('child/home')->with('videos', $videos);
     }
 }

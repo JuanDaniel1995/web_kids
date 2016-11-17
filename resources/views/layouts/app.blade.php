@@ -71,7 +71,7 @@
                             <li><a href="{{route('admin.tags.create')}}"><i class="fa fa-btn fa-plus"></i> {{trans('main.create')}}</a></li>
                         </ul>
                     </li>
-                     <li class="dropdown">
+                    <li class="dropdown">
                         <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">
                             {{trans('main.videos')}} <span class="caret"></span>
                         </a>
