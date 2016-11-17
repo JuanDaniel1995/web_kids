@@ -35,9 +35,6 @@ Route::group(['prefix' => 'child'], function () {
     Route::get('/login', 'Child\Auth\AuthController@showLoginForm');
     Route::post('/login', 'Child\Auth\AuthController@login');
     Route::get('/logout', 'Child\Auth\AuthController@logout');
-    Route::post('/password/email', 'Child\Auth\PasswordController@sendResetLinkEmail');
-    Route::post('/password/reset', 'Child\Auth\PasswordController@reset');
-    Route::get('/password/reset/{token?}', 'Admin\Auth\PasswordController@showResetForm');
     Route::group(['middleware' => 'auth'], function () {
     });
 });

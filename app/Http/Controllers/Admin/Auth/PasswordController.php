@@ -29,4 +29,21 @@ class PasswordController extends Controller
     {
         $this->middleware('guest');
     }
+
+    /**
+     * Display the form to request a password reset link.
+     *
+     * @return \Illuminate\Http\Response
+     */
+    public function showLinkRequestForm()
+    {
+        if (property_exists($this, 'linkRequestView')) {
+            return view($this->linkRequestView);
+        }
+
+        if (view()->exists('auth.passwords.email')) {
+            return view('auth.passwords.email');
+        }
+        return view('admin.auth.passwords.email');
+    }
 }

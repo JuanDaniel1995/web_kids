@@ -2,9 +2,9 @@
 
 namespace App\Http\Controllers\Child\Auth;
 
+use Illuminate\Foundation\Auth\AuthenticatesAndRegistersUsers;
 use Illuminate\Foundation\Auth\ThrottlesLogins;
 use Illuminate\Http\Request;
-use App\Traits\AuthenticatesAndRegistersUsers;
 use App\Http\Controllers\Controller;
 use App\Constants;
 use App\User;
