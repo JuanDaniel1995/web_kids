@@ -42,10 +42,7 @@
                 <!-- Right Side Of Navbar -->
                 <ul class="nav navbar-nav navbar-right">
                     <!-- Authentication Links -->
-                    @if (!Auth::guard('child')->check())
-                        <li><a href="{{ url('/child/login') }}">{{trans('main.login')}}</a></li>
-                        <li><a href="{{ url('/child/register') }}">{{trans('main.register')}}</a></li>
-                    @else
+                    @if (Auth::guard('child')->check())
                         <li class="dropdown">
                             <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">
                                 {{ Auth::guard('child')->user()->username }} <span class="caret"></span>
