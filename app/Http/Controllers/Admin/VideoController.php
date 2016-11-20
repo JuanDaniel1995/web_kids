@@ -16,7 +16,7 @@ class VideoController extends Controller implements IController
    
     public function __construct()
     {
-        $this->middleware('is_admin')->except('index');
+        $this->middleware('is_admin')->except(['index', 'show']);
     }
 
      /**
