@@ -73,8 +73,9 @@ class PlaylistController extends Controller implements IController
      * @return \Illuminate\Http\Response
      */
     public function edit($id)
-    {
-        //
+    {      
+        $playlist = $this->getData($id);
+        return view('admin/playlists/edit')->with('playlist', $playlist);
     }
 
     /**
@@ -86,7 +87,15 @@ class PlaylistController extends Controller implements IController
      */
     public function update(Request $request, $id)
     {
-        //
+         $this->validate($request, [
+            'description' => 'required|max:255|string',
+            'user_id' => 'required|integer|exists:users,id',
+            'public' => ['required', 'regex:/^(Y|N)$/'],
+        ]);
+        $playlist = Playlist::find($id);
+        $playlist->update($request->all());
+        return redirect(route('admin.playlists.index'));
+       
     }
 
     /**
@@ -110,7 +119,7 @@ class PlaylistController extends Controller implements IController
     {
         $sql = 'select playlists.id,
                 playlists.description,
-                case when playlists.public = "Y" then "Público" else "Privado" end as "public",
+                case when playlists.public = \'Y\' then \'Público\' else \'Privado\' end as public,
                 users.name as user
             FROM playlists
             inner join users on users.id = playlists.user_id';
@@ -119,7 +128,7 @@ class PlaylistController extends Controller implements IController
           $sql.=' where playlists.id = :playlist';
           $playlists = DB::select($sql, ['playlist' => $id])[0];
         } else if ($userRole === Constants::PARENT_ROLE) {
-            $sql.=' where users.id = :user_id or playlists.public = "Y"';
+            $sql.=' where users.id = :user_id or playlists.public = \'Y\'';
             $playlists = DB::select($sql, ['user_id' => Auth::user()->id]);
         } else if ($userRole === Constants::ADMIN_ROLE) $playlists = DB::select($sql);
         return $playlists;
