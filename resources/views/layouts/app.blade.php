@@ -80,6 +80,15 @@
                             <li><a href="{{route('admin.videos.create')}}"><i class="fa fa-btn fa-plus"></i> {{trans('main.create')}}</a></li>
                         </ul>
                     </li>
+                    <li class="dropdown">
+                        <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">
+                            {{trans('main.playlist')}} <span class="caret"></span>
+                        </a>
+                        <ul class="dropdown-menu" role="menu">
+                            <li><a href="{{route('admin.playlists.index')}}"><i class="fa fa-btn fa-user"></i> {{trans('main.playlist')}}</a></li>
+                            <li><a href="{{route('admin.playlists.create')}}"><i class="fa fa-btn fa-plus"></i> {{trans('main.create')}}</a></li>
+                        </ul>
+                    </li>
                 </ul>
             @endif
 

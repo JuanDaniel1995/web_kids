@@ -32,10 +32,10 @@ Route::group(['prefix' => 'admin'], function () {
 });
 
 Route::group(['prefix' => 'child'], function () {
-    Route::get('/', 'Child\HomeController@index');
     Route::get('/login', 'Child\Auth\AuthController@showLoginForm');
     Route::post('/login', 'Child\Auth\AuthController@login');
     Route::get('/logout', 'Child\Auth\AuthController@logout');
-    Route::group(['middleware' => 'auth'], function () {
+    Route::group(['middleware' => 'auth:child'], function () {
+        Route::get('/', 'Child\HomeController@index');
     });
 });

@@ -78,6 +78,22 @@ function deleteVideo(id) {
     }
 }
 
+function deletePlaylist(id) {
+    if (confirm('¿Desea continuar?')) {
+        $.ajax({
+        type: 'DELETE',
+        url: '/admin/playlists/' + id,
+        headers: {
+            'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+        }
+        }).done(function(data) {
+            window.location.reload();
+        }).fail(function(data) {
+            toastr.error(data.responseText);
+        });
+    }
+}
+
 $('a.page-scroll').bind('click', function(event) {
     var $anchor = $(this);
     $('html, body').stop().animate({

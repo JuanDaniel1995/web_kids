@@ -56,7 +56,7 @@ class ChildController extends Controller implements IController
         if ($user->role === Constants::PARENT_ROLE && (int)$request->input('user_id') !== $user->id) {
             throw new AuthorizationException();
         }
-        $this->save($request->all());
+        Child::create($request->all());
         return redirect(route('admin.children.index'));
     }
 
@@ -142,9 +142,8 @@ class ChildController extends Controller implements IController
           $sql.=' where id = :child_id';
           $children = DB::select($sql, ['child_id' => $id])[0];
         } else if ($userRole === Constants::PARENT_ROLE) {
-            /*$sql.=' where user_id = :user_id';
-            $children = DB::select($sql, ['user_id' => Auth::user()->id]);*/
-            $children = DB::select($sql);
+            $sql.=' where user_id = :user_id';
+            $children = DB::select($sql, ['user_id' => Auth::user()->id]);
         } else if ($userRole === Constants::ADMIN_ROLE) $children = DB::select($sql);
         return $children;
     }
@@ -156,17 +155,5 @@ class ChildController extends Controller implements IController
             return false;
         }
         return true;
-    }
-
-    private function save(array $data)
-    {
-        return Child::create([
-            'username' => $data['username'],
-            'birthdate' => $data['birthdate'],
-            'enabled_search' => $data['enabled_search'],
-            'restricted_mode' => $data['restricted_mode'],
-            'user_id' => $data['user_id'],
-            'password' => bcrypt($data['password']),
-        ]);
     }
 }

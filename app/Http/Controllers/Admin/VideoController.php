@@ -18,6 +18,7 @@ class VideoController extends Controller implements IController
     {
         $this->middleware('is_admin')->except('index');
     }
+
      /**
      * Display a listing of the resource.
      *
@@ -120,9 +121,9 @@ class VideoController extends Controller implements IController
     public function getData($id = null)
     {
         $sql = 'select videos.id,
-            videos.description,
-            videos.url,
-            categories.name as category
+                videos.description,
+                videos.url,
+                categories.name as category
             from videos
                 left join categories
                 on categories.id = videos.category_id';

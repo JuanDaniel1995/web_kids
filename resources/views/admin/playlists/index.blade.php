@@ -7,9 +7,9 @@
         <div class="table-responsive">
             <table class="table">
                 <thead>
-                    <th>{{trans('playlist.user')}}</th>
-                    <th>{{trans('playlist.description')}}</th>
-                    <th>{{trans('playlist.public')}}</th>
+                    <th>{{trans('playlists.user')}}</th>
+                    <th>{{trans('playlists.description')}}</th>
+                    <th>{{trans('playlists.public')}}</th>
                     <th>{{trans('main.edit')}}</th>
                     <th>{{trans('main.delete')}}</th>
                 </thead>
