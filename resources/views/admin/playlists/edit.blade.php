@@ -10,7 +10,6 @@
                     <form class="form-horizontal" role="form" method="POST" action="{{route('admin.playlists.update', $playlist->id)}}">
                         {{ csrf_field() }}
                         <input type='hidden' name='_method' value='PUT'>
-                        <input type="hidden" name="user_id" value="{{Auth::user()->id}}">
 
                         <div class="form-group{{ $errors->has('description') ? ' has-error' : '' }}">
                             <label for="description" class="col-md-4 control-label">{{trans('playlists.description')}}</label>
@@ -30,9 +29,9 @@
                             <label for="public" class="col-md-4 control-label">{{trans('playlists.public')}}</label>
 
                             <div class="col-md-6">
-                             <select id="public" name="public" class="selectpicker">
-                                    <option {{$playlist->public == 'Y' ? 'selected' : ''}} value="Y">{{trans('children.restricted.true')}}</option>
-                                    <option {{$playlist->public == 'N' ? 'selected' : ''}} value="N">{{trans('children.restricted.false')}}</option>
+                                <select id="public" name="public" class="selectpicker">
+                                    <option {{$playlist->public_value == 'Y' ? 'selected' : ''}} value="Y">{{trans('playlists.status.true')}}</option>
+                                    <option {{$playlist->public_value == 'N' ? 'selected' : ''}} value="N">{{trans('playlists.status.false')}}</option>
                                 </select>
 
                                 @if ($errors->has('public'))

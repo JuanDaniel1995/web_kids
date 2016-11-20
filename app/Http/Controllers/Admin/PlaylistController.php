@@ -2,7 +2,7 @@
 
 namespace App\Http\Controllers\Admin;
 
-
+use Illuminate\Auth\Access\AuthorizationException;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use App\Http\Requests;
@@ -50,6 +50,10 @@ class PlaylistController extends Controller implements IController
             'user_id' => 'required|integer|exists:users,id',
             'public' => ['required', 'regex:/^(Y|N)$/'],
         ]);
+        $user = User::find(Auth::user()->id);
+        if ($user->role === Constants::PARENT_ROLE && (int)$request->input('user_id') !== $user->id) {
+            throw new AuthorizationException();
+        }
         Playlist::create($request->all());
         return redirect(route('admin.playlists.index'));
     }
@@ -63,7 +67,8 @@ class PlaylistController extends Controller implements IController
     public function show($id)
     {
         $playlist = $this->getData($id);
-        return view('admin/playlists/show')->with('playlist', $playlist);
+        if ($this->isAllowed($playlist, true)) return view('admin/playlists/show')->with('playlist', $playlist);
+        throw new AuthorizationException();
     }
 
     /**
@@ -75,7 +80,8 @@ class PlaylistController extends Controller implements IController
     public function edit($id)
     {      
         $playlist = $this->getData($id);
-        return view('admin/playlists/edit')->with('playlist', $playlist);
+        if ($this->isAllowed($playlist)) return view('admin/playlists/edit')->with('playlist', $playlist);
+        throw new AuthorizationException();
     }
 
     /**
@@ -89,10 +95,10 @@ class PlaylistController extends Controller implements IController
     {
          $this->validate($request, [
             'description' => 'required|max:255|string',
-            'user_id' => 'required|integer|exists:users,id',
             'public' => ['required', 'regex:/^(Y|N)$/'],
         ]);
         $playlist = Playlist::find($id);
+        if (!$this->isAllowed($playlist)) throw new AuthorizationException();
         $playlist->update($request->all());
         return redirect(route('admin.playlists.index'));
        
@@ -120,7 +126,9 @@ class PlaylistController extends Controller implements IController
         $sql = 'select playlists.id,
                 playlists.description,
                 case when playlists.public = \'Y\' then \'Público\' else \'Privado\' end as public,
-                users.name as user
+                playlists.public as public_value,
+                users.name as user,
+                users.id as user_id
             FROM playlists
             inner join users on users.id = playlists.user_id';
         $userRole = User::find(Auth::user()->id)->role;
@@ -134,8 +142,9 @@ class PlaylistController extends Controller implements IController
         return $playlists;
     }
 
-    private function isAllowed($playlist)
+    private function isAllowed($playlist, $readOnly = false)
     {
+        if ($readOnly && $playlist->public_value === 'Y') return true;
         $user = User::find(Auth::user()->id);
         if ($user->role === Constants::PARENT_ROLE && $playlist->user_id !== $user->id) {
             return false;
