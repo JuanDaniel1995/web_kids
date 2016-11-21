@@ -8,6 +8,7 @@ use App\Http\Controllers\Controller;
 use App\Http\Requests;
 use App\Constants;
 use App\Playlist;
+use App\PlaylistVideo;
 use App\User;
 use App\Video;
 use Auth;
@@ -51,7 +52,7 @@ class PlaylistVideoController extends Controller implements IController
             'playlist_id' => 'required|integer|exists:playlists,id',
             'video_id' => 'required|integer|exists:videos,id',
         ]);
-        Playlist::create($request->all());
+        PlaylistVideo::create($request->all());
         return redirect(route('admin.playlists_videos.index'));
     }
 
