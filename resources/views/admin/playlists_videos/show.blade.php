@@ -10,7 +10,7 @@
                     <div class="form-group">
                         <label class="col-md-4 control-label">{{trans('playlists_videos.video')}}</label>
                         <div class="col-md-6">
-                            <p>{{$playlists_videos->video}}</p>
+                            <p>{{$playlist_video->video}}</p>
                         </div>
                     </div>                 
                 </div>
