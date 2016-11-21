@@ -55,7 +55,8 @@ class PlaylistVideoController extends Controller implements IController
      */
     public function show($id)
     {
-        //
+        $playlist_video = $this->getData($id);
+        return view('admin/playlists_videos/show')->with('playlist_video', $playlist_video);
     }
 
     /**
