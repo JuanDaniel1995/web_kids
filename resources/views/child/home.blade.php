@@ -16,15 +16,22 @@
     <div class="container">
         <div class="row">
             <h1 class="page-header text-center">{{trans('main.videos')}}</h1>
-            @foreach($videos as $video)
-                <div class="col-md-6 portfolio-item">
-                    <h3>{{$video->description}}</h3>
+                <div class="col-md-6 portfolio-item" v-cloak v-for="video in videos">
+                    <h3>@{{video.description}}</h3>
                     <div class="embed-responsive embed-responsive-16by9">
-                      <iframe class="embed-responsive-item" src="{{$video->url}}"></iframe>
+                      <iframe class="embed-responsive-item" src="@{{video.url}}"></iframe>
                     </div>
                 </div>
-            @endforeach
         </div>
     </div>
 </section>
 @endsection
+
+@section('javascripts')
+    @parent
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-easing/1.3/jquery.easing.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/vue/1.0.26/vue.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/vue-resource/0.1.13/vue-resource.min.js"></script>
+    <script src="{{ asset('js/child.js') }}"></script>
+    <script src="{{ asset('js/vue/dashboard.js') }}"></script>
+@stop
