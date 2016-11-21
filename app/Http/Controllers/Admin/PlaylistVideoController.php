@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Http\Controllers;
+namespace App\Http\Controllers\Admin;
 
 use Illuminate\Auth\Access\AuthorizationException;
 use Illuminate\Http\Request;
@@ -21,8 +21,9 @@ class PlaylistVideoController extends Controller implements IController
      * @return \Illuminate\Http\Response
      */
     public function index()
-    {
-        //
+    {        
+        $playlists = $this->getData();
+        return view('admin/playlists_videos/index')->with('playlists', $playlists);
     }
 
     /**
@@ -90,25 +91,23 @@ class PlaylistVideoController extends Controller implements IController
     {
         //
     }
-    public function getData($id = null)
+       public function getData($id = null)
     {
-        $sql = 'select playlists.id,
-                playlists.description,
-                case when playlists.public = \'Y\' then \'Público\' else \'Privado\' end as public,
-                playlists.public as public_value,
-                users.name as user,
-                users.id as user_id
-            FROM playlists
-            inner join users on users.id = playlists.user_id';
+        $sql = 'select playlist_video.id,
+                playlists.description as playlist,
+                videos.description as video
+            from playlist_video
+                join playlists on playlists.id = playlist_video.playlist_id
+                join videos on videos.id = playlist_video.video_id';
         $userRole = User::find(Auth::user()->id)->role;
         if ($id !== null) {
-          $sql.=' where playlists.id = :playlist';
-          $playlists = DB::select($sql, ['playlist' => $id])[0];
+          $sql.=' where playlist_video.id = :playlist_video';
+          $list_video = DB::select($sql, ['playlist_video' => $id])[0];
         } else if ($userRole === Constants::PARENT_ROLE) {
-            $sql.=' where users.id = :user_id or playlists.public = \'Y\'';
-            $playlists = DB::select($sql, ['user_id' => Auth::user()->id]);
-        } else if ($userRole === Constants::ADMIN_ROLE) $playlists = DB::select($sql);
-        return $playlists;
+            $sql.=' where playlists.user_id = :user_id or playlists.public = \'Y\'';
+            $list_video = DB::select($sql, ['user_id' => Auth::user()->id]);
+        } else if ($userRole === Constants::ADMIN_ROLE) $list_video = DB::select($sql);
+        return $list_video;
     }
 
 }

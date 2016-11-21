@@ -32,4 +32,5 @@ return [
     'search' => 'Search...',
     'appSlogan' => 'Web Kids, a safe place to see videos.',
     'appDescription' => 'Web Kids allows you to see playlists or videos that your father allow you to see.',
+    'playlistsVideo' => 'Playlist-Video',
 ];

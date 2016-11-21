@@ -28,6 +28,7 @@ Route::group(['prefix' => 'admin'], function () {
         Route::resource('/tags', 'Admin\TagController');
         Route::resource('/videos', 'Admin\VideoController');
         Route::resource('/playlists', 'Admin\PlaylistController');
+        Route::resource('/playlists_videos', 'Admin\PlaylistVideoController');
     });
 });
 
