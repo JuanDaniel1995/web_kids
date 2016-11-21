@@ -7,6 +7,7 @@ use Illuminate\Database\Eloquent\Model;
 class PlaylistVideo extends Model
 {
 	protected $table='playlist_video';
+
     //
      /**
      * The attributes that are mass assignable.

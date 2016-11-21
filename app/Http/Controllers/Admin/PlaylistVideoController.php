@@ -37,7 +37,7 @@ class PlaylistVideoController extends Controller implements IController
     {
         $videos = Video::All();
         $playlists = Playlist::where('user_id', '=', Auth::user()->id)->get();
-        return view('admin/playlists_videos/create')->with('videos', $videos)->with("playlists", $playlists);
+        return view('admin/playlists_videos/create')->with('videos', $videos)->with('playlists', $playlists);
     }
 
     /**
@@ -99,7 +99,7 @@ class PlaylistVideoController extends Controller implements IController
      */
     public function destroy($id)
     {
-           try {
+       try {
           PlaylistVideo::destroy($id);
           return response()->json(Lang::get('main.deleteSuccess'), 200);
         } catch(\Exception $e) {
