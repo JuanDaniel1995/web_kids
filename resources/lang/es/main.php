@@ -32,5 +32,6 @@ return [
     'search' => 'Buscar...',
     'appSlogan' => 'Web Kids, un lugar seguro para ver videos.',
     'appDescription' => 'Web Kids te permite ver listas de reproducción o videos que tus padres te permitan ver.',
-    'playlistsVideo' => 'Lista de reproducción-video',
+    'playlistsVideo' => 'Lista de reproducción - Video',
+    'tagVideo' => 'Etiqueta - Video',
 ];
