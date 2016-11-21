@@ -34,10 +34,9 @@ class PlaylistVideoController extends Controller implements IController
      */
     public function create()
     {
-        $videos=Video::All();
-        $playlists=Playlist::where('user_id','=',⁠⁠⁠Auth::user()->id);
-        return view('admin/playlists_videos/create')->with("videos", $videos)
-        ->with("playlists",$playlists);
+        $videos = Video::All();
+        $playlists = Playlist::where('user_id', '=', Auth::user()->id)->get();
+        return view('admin/playlists_videos/create')->with('videos', $videos)->with("playlists", $playlists);
     }
 
     /**
@@ -96,7 +95,8 @@ class PlaylistVideoController extends Controller implements IController
     {
         //
     }
-       public function getData($id = null)
+
+    public function getData($id = null)
     {
         $sql = 'select playlist_video.id,
                 playlists.description as playlist,
