@@ -99,7 +99,12 @@ class PlaylistVideoController extends Controller implements IController
      */
     public function destroy($id)
     {
-        //
+           try {
+          PlaylistVideo::destroy($id);
+          return response()->json(Lang::get('main.deleteSuccess'), 200);
+        } catch(\Exception $e) {
+          return response()->json(Lang::get('main.deleteFail'), 404);
+        }
     }
 
     public function getData($id = null)

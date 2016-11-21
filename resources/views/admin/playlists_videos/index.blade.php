@@ -18,7 +18,7 @@
                         <td><a href="{{route('admin.playlists_videos.show', $list->id)}}">{{$list->playlist}}</a></td>
                         <td>{{$list->video}}</td>
                         <td><a href="{{route('admin.playlists_videos.edit', $list->id)}}"><span class='glyphicon glyphicon-pencil'></a></td>
-                        <td><a href="javascript:deletePlaylist('{{ $list->id }}');"><span class='glyphicon glyphicon-trash'></a></td>
+                        <td><a href="javascript:deletePlaylistVideo('{{ $list->id }}');"><span class='glyphicon glyphicon-trash'></a></td>
                     </tr>
                 @endforeach
                 </tbody>
