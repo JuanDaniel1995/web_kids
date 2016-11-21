@@ -47,7 +47,12 @@ class PlaylistVideoController extends Controller implements IController
      */
     public function store(Request $request)
     {
-        //
+        $this->validate($request, [
+            'playlist_id' => 'required|integer|exists:playlists,id',
+            'video_id' => 'required|integer|exists:videos,id',
+        ]);
+        Playlist::create($request->all());
+        return redirect(route('admin.playlists_videos.index'));
     }
 
     /**
