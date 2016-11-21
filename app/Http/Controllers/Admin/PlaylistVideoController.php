@@ -9,6 +9,7 @@ use App\Http\Requests;
 use App\Constants;
 use App\Playlist;
 use App\User;
+use App\Video;
 use Auth;
 use DB;
 use Lang;
@@ -33,7 +34,10 @@ class PlaylistVideoController extends Controller implements IController
      */
     public function create()
     {
-        //
+        $videos=Video::All();
+        $playlists=Playlist::where('user_id','=',⁠⁠⁠Auth::user()->id);
+        return view('admin/playlists_videos/create')->with("videos", $videos)
+        ->with("playlists",$playlists);
     }
 
     /**
