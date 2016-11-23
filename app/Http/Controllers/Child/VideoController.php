@@ -24,12 +24,9 @@ class VideoController extends Controller implements IController
      */
     public function index(Request $request)
     {
-        if ($request->wantsJson()) {
-            if (Auth::guard('child')->user()->enabled_search === 'D')
-                return response()->json(Lang::get('main.permissions'), 401);
-            return response()->json($this->filterData($request->input('search')), 200);
-        }
-        return view('child/home');
+        if (Auth::guard('child')->user()->enabled_search === 'D')
+            return response()->json(Lang::get('main.permissions'), 401);
+        return response()->json($this->filterData($request->input('search')), 200);
     }
 
     public function filterData($search)

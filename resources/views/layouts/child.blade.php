@@ -62,9 +62,12 @@
                         </li>
                     @endif
                 </ul>
-                <form class="navbar-form navbar-right hidden-xs" role="search" v-on:submit.prevent="filterVideos">
+                <div class="navbar-form navbar-right hidden-xs" role="search">
                     <div class="form-group input-group">
-                        <input id="search" type="text" class="form-control" placeholder="{{trans('main.search')}}">
+                        <input id="search_videos" type="text" class="form-control" placeholder="{{trans('main.searchVideos')}}" v-on:keyup.enter="filterVideos">
+                    </div>
+                    <div class="form-group input-group">
+                        <input id="search_playlists" type="text" class="form-control" placeholder="{{trans('main.searchPlaylists')}}" v-on:keyup.enter="filterPlaylists">
                     </div>
                 </form>
             </div>
