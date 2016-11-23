@@ -34,15 +34,18 @@
                 </button>
                 <a class="navbar-brand page-scroll" href="#app-layout">Web Kids</a>
             </div>
-            @if (Auth::guard('child')->check())
             <div class="collapse navbar-collapse" id="app-navbar-collapse">
                 <!-- Left Side Of Navbar -->
                 <ul class="nav navbar-nav">
+                    @if (Auth::guard('child')->user()->enabled_search === 'E')
+                        <li>
+                            <a class="page-scroll" href="#videos">{{trans('main.videos')}}</a>
+                        </li>
+                    @endif
                     <li>
-                        <a class="page-scroll" href="#videos">{{trans('main.videos')}}</a>
+                        <a class="page-scroll" href="#playlists">{{trans('main.playlist')}}</a>
                     </li>
                 </ul>
-            @endif
 
                 <!-- Right Side Of Navbar -->
                 <ul class="nav navbar-nav navbar-right">

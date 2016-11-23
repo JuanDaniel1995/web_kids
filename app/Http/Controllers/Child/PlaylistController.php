@@ -9,46 +9,34 @@ use Auth;
 use DB;
 use Lang;
 
-class VideoController extends Controller implements IController
+class PlaylistController extends Controller implements IController
 {
-
     public function __construct()
     {
         $this->middleware('auth:child');
     }
 
-    /**
-     * Show the application dashboard.
-     *
-     * @return \Illuminate\Http\Response
-     */
     public function index(Request $request)
     {
-        if ($request->wantsJson()) {
-            if (Auth::guard('child')->user()->enabled_search === 'D')
-                return response()->json(Lang::get('main.permissions'), 401);
-            return response()->json($this->filterData($request->input('search')), 200);
-        }
-        return view('child/home');
+        return response()->json($this->filterData($request->input('search')), 200);
     }
 
     public function filterData($search)
     {
-        $sql = 'select distinct(videos.id),
-                videos.description,
-                videos.url
-            from videos
+        $sql = 'select distinct(playlists.id),
+                playlists.description as playlist,
+                videos.description as video
+            from playlists
+                join playlist_video on playlist_video.playlist_id = playlists.id
+                join videos on videos.id = playlist_video.video_id
                 join categories on categories.id = videos.category_id
                 and categories.minimum_age <= :age';
         if (isset($search)) {
-            $sql.=' join tag_video on tag_video.video_id = videos.id
-                    join tags on tags.id = tag_video.tag_id
-                    where videos.description like \'%:search%\'
-                    or tags.description like \'%:search%\'';
+            $sql.=' where playlists.description like \'%:search%\'';
             $sql = str_replace(':search', $search, $sql);
         }
-        $videos = DB::select($sql, ['age' => $this->getYears()]);
-        return $videos;
+        $playlists = DB::select($sql, ['age' => $this->getYears()]);
+        return $playlists;
     }
 
     private function getYears()

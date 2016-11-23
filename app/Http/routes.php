@@ -39,6 +39,7 @@ Route::group(['prefix' => 'child'], function () {
     Route::get('/logout', 'Child\Auth\AuthController@logout');
     Route::group(['middleware' => 'auth:child'], function () {
         Route::get('/', 'Child\HomeController@index');
-        Route::resource('/videos', 'Child\VideoController');
+        Route::resource('/videos', 'Child\VideoController', ['only' => ['index']]);
+        Route::resource('/playlists', 'Child\PlaylistController', ['only' => ['index']]);
     });
 });

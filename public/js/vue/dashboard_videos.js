@@ -1,5 +1,3 @@
-Vue.http.headers.common['X-CSRF-TOKEN'] = $('meta[name="csrf-token"]').attr('content');
-
 new Vue({
     el: '#app-layout',
     data: {
@@ -21,6 +19,8 @@ new Vue({
             let self = this;
             this.$http.get('/child/videos?search=' + search).then(function(response) {
                 self.$set('videos', response.data);
+            }, (response) => {
+                toastr.error(response.data);
             });
         }
     }
