@@ -1,10 +1,14 @@
 <?php
 
 namespace App\Http\Controllers\Admin;
-
 use Illuminate\Http\Request;
-
+use App\Http\Controllers\Controller;
 use App\Http\Requests;
+use App\Constants;
+use App\Category;
+use Auth;
+use DB;
+use Lang;
 
 class ChildrenPlaylistController extends Controller implements IController
 {
@@ -14,8 +18,9 @@ class ChildrenPlaylistController extends Controller implements IController
      * @return \Illuminate\Http\Response
      */
     public function index()
-    {
-        //
+    {        
+        $data = $this->getData();
+        return view('admin/children_playlist/index')->with('data', $data);    
     }
 
     /**
@@ -25,7 +30,7 @@ class ChildrenPlaylistController extends Controller implements IController
      */
     public function create()
     {
-        //
+        
     }
 
     /**

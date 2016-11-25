@@ -30,6 +30,7 @@ Route::group(['prefix' => 'admin'], function () {
         Route::resource('/playlists', 'Admin\PlaylistController');
         Route::resource('/playlists_videos', 'Admin\PlaylistVideoController');
         Route::resource('/tags_videos', 'Admin\TagVideoController');
+        Route::resource('/children_playlist', 'Admin\ChildrenPlaylistController');
     });
 });
 
