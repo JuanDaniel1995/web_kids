@@ -12,11 +12,11 @@
             <div class="panel panel-default">
                 <div class="panel-heading">{{trans('playlistsVideos.new')}}</div>
                 <div class="panel-body">
-                    <form class="form-horizontal" role="form" method="POST" action="{{route('admin.playlists_videos.store')}}">
+                    <form class="form-horizontal" role="form" method="POST" action="{{route('admin.tags_videos.store')}}">
                         {{ csrf_field() }}
 
                         <div class="form-group{{ $errors->has('video_id') ? ' has-error' : '' }}">
-                            <label for="video_id" class="col-md-4 control-label">{{trans('playlistsVideos.video')}}</label>
+                            <label for="video_id" class="col-md-4 control-label">{{trans('tagsVideos.video')}}</label>
 
                             <div class="col-md-6">
                                 <select id="video_id" name="video_id" class="selectpicker">
@@ -33,19 +33,19 @@
                             </div>
                         </div>
 
-                        <div class="form-group{{ $errors->has('playlist_id') ? ' has-error' : '' }}">
-                            <label for="playlist_id" class="col-md-4 control-label">{{trans('playlistsVideos.playlist')}}</label>
+                        <div class="form-group{{ $errors->has('tag_id') ? ' has-error' : '' }}">
+                            <label for="tag_id" class="col-md-4 control-label">{{trans('tagsVideos.tag')}}</label>
 
                             <div class="col-md-6">
-                               <select id="playlist_id" name="playlist_id" class="selectpicker">
-                                    @foreach($playlists as $playlist)
-                                        <option value="{{$playlist->id}}">{{$playlist->description}}</option>
+                               <select id="tag_id" name="tag_id" class="selectpicker">
+                                    @foreach($tags as $tag)
+                                        <option value="{{$tag->id}}">{{$tag->description}}</option>
                                     @endforeach
                                 </select>
 
-                                @if ($errors->has('playlist_id'))
+                                @if ($errors->has('tag_id'))
                                     <span class="help-block">
-                                        <strong>{{ $errors->first('playlist_id') }}</strong>
+                                        <strong>{{ $errors->first('tag_id') }}</strong>
                                     </span>
                                 @endif
                             </div>

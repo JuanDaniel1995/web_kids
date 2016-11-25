@@ -110,11 +110,20 @@ function deletePlaylistVideo(id)
         });
     }
 }
-$('a.page-scroll').bind('click', function(event) {
-    var $anchor = $(this);
-    $('html, body').stop().animate({
-        scrollTop: ($($anchor.attr('href')).offset().top - 50)
-    }, 1250, 'easeInOutExpo');
-    event.preventDefault();
 
-});
+function deleteTagVideo(id)
+{
+    if (confirm('¿Desea continuar?')) {
+        $.ajax({
+        type: 'DELETE',
+        url: '/admin/tags_videos/' + id,
+        headers: {
+            'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+        }
+        }).done(function(data) {
+            window.location.reload();
+        }).fail(function(data) {
+            toastr.error(data.responseText);
+        });
+    }
+}

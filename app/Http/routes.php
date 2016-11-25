@@ -29,6 +29,7 @@ Route::group(['prefix' => 'admin'], function () {
         Route::resource('/videos', 'Admin\VideoController');
         Route::resource('/playlists', 'Admin\PlaylistController');
         Route::resource('/playlists_videos', 'Admin\PlaylistVideoController');
+        Route::resource('/tags_videos', 'Admin\TagVideoController');
     });
 });
 
@@ -38,5 +39,7 @@ Route::group(['prefix' => 'child'], function () {
     Route::get('/logout', 'Child\Auth\AuthController@logout');
     Route::group(['middleware' => 'auth:child'], function () {
         Route::get('/', 'Child\HomeController@index');
+        Route::resource('/videos', 'Child\VideoController', ['only' => ['index']]);
+        Route::resource('/playlists', 'Child\PlaylistController', ['only' => ['index']]);
     });
 });

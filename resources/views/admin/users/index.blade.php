@@ -1,5 +1,10 @@
 @extends('layouts.app')
 
+@section('styles')
+    @parent
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/toastr.min.css">
+@endsection
+
 @section('content')
 <div class="col-md-8 col-md-offset-2">
     <div class="panel panel-default">
@@ -28,4 +33,10 @@
         </div>
     </div>
 </div>
+@endsection
+
+@section('javascripts')
+    @parent
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/toastr.min.js"></script>
+    <script src="{{ asset('js/app.js') }}"></script>
 @endsection

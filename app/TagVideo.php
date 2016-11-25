@@ -4,9 +4,9 @@ namespace App;
 
 use Illuminate\Database\Eloquent\Model;
 
-class PlaylistVideo extends Model
+class TagVideo extends Model
 {
-	protected $table = 'playlist_video';
+    protected $table = 'tag_video';
 
     //
      /**
@@ -15,6 +15,6 @@ class PlaylistVideo extends Model
      * @var array
      */
     protected $fillable = [
-        'playlist_id', 'video_id',
+        'tag_id', 'video_id',
     ];
 }

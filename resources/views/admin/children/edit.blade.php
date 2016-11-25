@@ -1,5 +1,10 @@
 @extends('layouts.app')
 
+@section('styles')
+    @parent
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-select/1.11.2/css/bootstrap-select.min.css">
+@endsection
+
 @section('content')
 <div class="container">
     <div class="row">
@@ -85,4 +90,9 @@
         </div>
     </div>
 </div>
+@endsection
+
+@section('javascripts')
+    @parent
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-select/1.11.2/js/bootstrap-select.min.js"></script>
 @endsection

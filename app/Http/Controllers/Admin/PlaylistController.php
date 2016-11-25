@@ -93,7 +93,7 @@ class PlaylistController extends Controller implements IController
      */
     public function update(Request $request, $id)
     {
-         $this->validate($request, [
+        $this->validate($request, [
             'description' => 'required|max:255|string',
             'public' => ['required', 'regex:/^(Y|N)$/'],
         ]);
@@ -101,7 +101,6 @@ class PlaylistController extends Controller implements IController
         if (!$this->isAllowed($playlist)) throw new AuthorizationException();
         $playlist->update($request->all());
         return redirect(route('admin.playlists.index'));
-       
     }
 
     /**
@@ -121,6 +120,7 @@ class PlaylistController extends Controller implements IController
             return response()->json(Lang::get('main.deleteFail'), 404);
         }
     }
+
     public function getData($id = null)
     {
         $sql = 'select playlists.id,
