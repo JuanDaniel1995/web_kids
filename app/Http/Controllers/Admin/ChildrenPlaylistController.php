@@ -6,7 +6,7 @@ use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use App\Http\Requests;
 use App\Constants;
-use App\Category;
+use App\ChildrenPlaylist;
 use App\User;
 use Auth;
 use DB;
@@ -32,7 +32,11 @@ class ChildrenPlaylistController extends Controller implements IController
      */
     public function create()
     {
-        return view('admin/children_playlist/create');
+        $children = $this->getChildren();
+        $playlists = $this->getPlaylists();
+        return view('admin/children_playlist/create')
+            ->with('children', $children)
+            ->with('playlists', $playlists);
     }
 
     /**
@@ -47,7 +51,7 @@ class ChildrenPlaylistController extends Controller implements IController
             'children_id' => 'required|integer|exists:children,id',
             'playlist_id' => 'required|integer|exists:playlists,id',
         ]);
-        Child::create($request->all());
+        ChildrenPlaylist::create($request->all());
         return redirect(route('admin.children_playlist.index'));
     }
 
@@ -110,6 +114,32 @@ class ChildrenPlaylistController extends Controller implements IController
           $data = DB::select($sql, ['playlist' => $id])[0];
         } else if ($userRole === Constants::PARENT_ROLE) {
             $sql.=' where playlists.user_id = :user_id';
+            $data = DB::select($sql, ['user_id' => Auth::user()->id]);
+        } else if ($userRole === Constants::ADMIN_ROLE) $data = DB::select($sql);
+        return $data;
+    }
+
+    private function getChildren()
+    {
+        $sql = 'select id,
+                username
+            from children';
+        $userRole = User::find(Auth::user()->id)->role;
+        if ($userRole === Constants::PARENT_ROLE) {
+            $sql.=' where user_id = :user_id';
+            $data = DB::select($sql, ['user_id' => Auth::user()->id]);
+        } else if ($userRole === Constants::ADMIN_ROLE) $data = DB::select($sql);
+        return $data;
+    }
+
+    private function getPlaylists()
+    {
+        $sql = 'select id,
+                description
+            from playlists';
+        $userRole = User::find(Auth::user()->id)->role;
+        if ($userRole === Constants::PARENT_ROLE) {
+            $sql.=' where user_id = :user_id';
             $data = DB::select($sql, ['user_id' => Auth::user()->id]);
         } else if ($userRole === Constants::ADMIN_ROLE) $data = DB::select($sql);
         return $data;
