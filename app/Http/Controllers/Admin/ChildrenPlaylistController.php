@@ -83,4 +83,23 @@ class ChildrenPlaylistController extends Controller implements IController
     {
         //
     }
+
+    public function getData($id = null)
+    {
+        $sql = 'select children_playlist.id
+                playlists.description,
+                children.username
+            from children_playlist
+            join playlists on playlists.id = children_playlist.playlist_id
+            join children on children.id = children_playlist.children_id';
+        $userRole = User::find(Auth::user()->id)->role;
+        if ($id !== null) {
+          $sql.=' where children_playlist.id = :id';
+          $data = DB::select($sql, ['playlist' => $id])[0];
+        } else if ($userRole === Constants::PARENT_ROLE) {
+            $sql.=' where playlists.user_id = :user_id';
+            $data = DB::select($sql, ['user_id' => Auth::user()->id]);
+        } else if ($userRole === Constants::ADMIN_ROLE) $data = DB::select($sql);
+        return $data;
+    }
 }
