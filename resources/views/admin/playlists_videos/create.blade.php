@@ -33,19 +33,19 @@
                             </div>
                         </div>
 
-                        <div class="form-group{{ $errors->has('playlist_id') ? ' has-error' : '' }}">
-                            <label for="playlist_id" class="col-md-4 control-label">{{trans('playlistsVideos.playlist')}}</label>
+                        <div class="form-group{{ $errors->has('children_id') ? ' has-error' : '' }}">
+                            <label for="children_id" class="col-md-4 control-label">{{trans('playlistsVideos.playlist')}}</label>
 
                             <div class="col-md-6">
-                               <select id="playlist_id" name="playlist_id" class="selectpicker">
-                                    @foreach($playlists as $playlist)
-                                        <option value="{{$playlist->id}}">{{$playlist->description}}</option>
+                               <select id="children_id" name="children_id" class="selectpicker">
+                                    @foreach($children as $child)
+                                        <option value="{{$child->id}}">{{$child->username}}</option>
                                     @endforeach
                                 </select>
 
-                                @if ($errors->has('playlist_id'))
+                                @if ($errors->has('children_id'))
                                     <span class="help-block">
-                                        <strong>{{ $errors->first('playlist_id') }}</strong>
+                                        <strong>{{ $errors->first('children_id') }}</strong>
                                     </span>
                                 @endif
                             </div>

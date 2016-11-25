@@ -32,7 +32,7 @@ class ChildrenPlaylistController extends Controller implements IController
      */
     public function create()
     {
-        
+        return view('admin/children_playlist/create');
     }
 
     /**
@@ -43,7 +43,12 @@ class ChildrenPlaylistController extends Controller implements IController
      */
     public function store(Request $request)
     {
-        //
+        $this->validate($request, [
+            'children_id' => 'required|integer|exists:children,id',
+            'playlist_id' => 'required|integer|exists:playlists,id',
+        ]);
+        Child::create($request->all());
+        return redirect(route('admin.children_playlist.index'));
     }
 
     /**
