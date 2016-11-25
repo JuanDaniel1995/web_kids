@@ -20,9 +20,8 @@
                 <tbody>
                 @foreach($data as $list)
                     <tr>
-                        <td><a href="{{route('admin.children_playlist.show', $list->id)}}">{{$list->user}}</a></td>
-                        <td>{{$list->username}}</td>
-                        <td>{{$list->descripcion}}</td>
+                        <td><a href="{{route('admin.children_playlist.show', $list->id)}}">{{$list->username}}</a></td>
+                        <td>{{$list->description}}</td>
                         <td><a href="{{route('admin.children_playlist.edit', $list->id)}}"><span class='glyphicon glyphicon-pencil'></a></td>
                         <td><a href="javascript:deletePlaylist('{{ $list->id }}');"><span class='glyphicon glyphicon-trash'></a></td>
                     </tr>

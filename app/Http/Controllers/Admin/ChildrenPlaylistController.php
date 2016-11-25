@@ -1,11 +1,13 @@
 <?php
 
 namespace App\Http\Controllers\Admin;
+
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use App\Http\Requests;
 use App\Constants;
 use App\Category;
+use App\User;
 use Auth;
 use DB;
 use Lang;
@@ -91,7 +93,7 @@ class ChildrenPlaylistController extends Controller implements IController
 
     public function getData($id = null)
     {
-        $sql = 'select children_playlist.id
+        $sql = 'select children_playlist.id,
                 playlists.description,
                 children.username
             from children_playlist
