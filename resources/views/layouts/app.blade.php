@@ -50,6 +50,8 @@
                         </a>
                         <ul class="dropdown-menu" role="menu">
                             <li><a href="{{route('admin.children.index')}}"><i class="fa fa-btn fa-user"></i> {{trans('main.children')}}</a></li>
+                            <li><a href="{{route('admin.children_playlist.index')}}"><i class="fa fa-btn fa-user"></i> {{trans('main.playlist')}}</a></li>
+                            <li><a href="{{route('admin.children_playlist.create')}}"><i class="fa fa-btn fa-user"></i> {{trans('playlists.assign')}}</a></li>
                             <li><a href="{{route('admin.children.create')}}"><i class="fa fa-btn fa-plus"></i> {{trans('main.create')}}</a></li>
                         </ul>
                     </li>
@@ -89,7 +91,7 @@
                         <ul class="dropdown-menu" role="menu">
                             <li><a href="{{route('admin.playlists.index')}}"><i class="fa fa-btn fa-user"></i> {{trans('main.playlist')}}</a></li>
                             <li><a href="{{route('admin.playlists_videos.index')}}"><i class="fa fa-btn fa-user"></i> {{trans('main.videos')}}</a></li>
-                            <li><a href="{{route('admin.playlists_videos.create')}}"><i class="fa fa-btn fa-user"></i> {{trans('playlists.assign')}}</a></li>
+                            <li><a href="{{route('admin.playlists_videos.create')}}"><i class="fa fa-btn fa-user"></i> {{trans('videos.assign')}}</a></li>
                             <li><a href="{{route('admin.playlists.create')}}"><i class="fa fa-btn fa-plus"></i> {{trans('main.create')}}</a></li>
                         </ul>
                     </li>

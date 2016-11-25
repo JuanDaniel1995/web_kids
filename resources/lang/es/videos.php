@@ -6,6 +6,7 @@ return [
     'url' => 'Enlace',
     'category' => 'Categoría',
     'new' => 'Nuevo video',
+    'assign' => 'Asignar video',
 ];
 
 

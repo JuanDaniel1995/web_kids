@@ -10,5 +10,5 @@ return [
         'true' => 'Público',
         'false' => 'Privado'
     ],
-    'assign' => 'Asignar video',
+    'assign' => 'Asignar lista',
 ];
