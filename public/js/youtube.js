@@ -18,11 +18,11 @@ $('#sync').bind('click', function(event) {
 
 function onLoad() {
     gapi.client.load('youtube', 'v3', function() {
-        createPlaylist();
+        syncPlaylist();
     });
 }
 
-function createPlaylist() {
+function syncPlaylist() {
     var title = $('.panel-heading').text();
     var request = gapi.client.youtube.playlists.insert({
         part: 'snippet,status',
