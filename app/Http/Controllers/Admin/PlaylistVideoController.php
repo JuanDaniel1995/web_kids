@@ -68,8 +68,14 @@ class PlaylistVideoController extends Controller implements IController
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function show($id)
+    public function show(Request $request, $id)
     {
+        if ($request->ajax()) {
+            $playlist_video = PlaylistVideo::find($id);
+            $playlist = Playlist::find($playlist_video->playlist_id);
+            $video = Video::find($playlist_video->video_id);
+            return response()->json(['video' => $video, 'playlist' => $playlist], 200);
+        }
         $playlist_video = $this->getData($id);
         $playlist = $this->getPlaylists($playlist_video->playlist_id);
         if ($this->isAllowed($playlist, true)) 

@@ -42,6 +42,7 @@
 @section('javascripts')
     @parent
     <script src="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/toastr.min.js"></script>
-    <script src="{{ asset('js/youtube.js') }}"></script>
+    <script src="{{ asset('js/youtube/playlist.js') }}"></script>
+    <script src="{{ asset('js/youtube/auth.js') }}"></script>
     <script src='https://apis.google.com/js/api.js'></script>
 @endsection
