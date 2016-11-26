@@ -63,9 +63,11 @@
                     @endif
                 </ul>
                 <div class="navbar-form navbar-right hidden-xs" role="search">
-                    <div class="form-group input-group">
-                        <input id="search_videos" type="text" class="form-control" placeholder="{{trans('main.searchVideos')}}" v-on:keyup.enter="filterVideos">
-                    </div>
+                    @if (Auth::guard('child')->user()->enabled_search === 'E')
+                        <div class="form-group input-group">
+                            <input id="search_videos" type="text" class="form-control" placeholder="{{trans('main.searchVideos')}}" v-on:keyup.enter="filterVideos">
+                        </div>
+                    @endif
                     <div class="form-group input-group">
                         <input id="search_playlists" type="text" class="form-control" placeholder="{{trans('main.searchPlaylists')}}" v-on:keyup.enter="filterPlaylists">
                     </div>

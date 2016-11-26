@@ -11,4 +11,5 @@ return [
         'false' => 'Private'
     ],
     'assign' => 'Assign list',
+    'sync' => 'Syncronize',
 ];

@@ -93,11 +93,19 @@ class PlaylistController extends Controller implements IController
      */
     public function update(Request $request, $id)
     {
+        $playlist = Playlist::find($id);
+        if ($request->ajax()) {
+            $user = User::find(Auth::user()->id);
+            if ($user->role === Constants::PARENT_ROLE && $playlist->user_id !== $user->id) {
+                return response()->json(Lang::get('main.permissions'), 401);
+            }
+            $playlist->update($request->all());
+            return response()->json(Lang::get('main.updateSuccess'), 200);
+        }
         $this->validate($request, [
             'description' => 'required|max:255|string',
             'public' => ['required', 'regex:/^(Y|N)$/'],
         ]);
-        $playlist = Playlist::find($id);
         if (!$this->isAllowed($playlist)) throw new AuthorizationException();
         $playlist->update($request->all());
         return redirect(route('admin.playlists.index'));

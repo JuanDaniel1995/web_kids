@@ -12,6 +12,6 @@ class Playlist extends Model
      * @var array
      */
     protected $fillable = [
-        'description', 'user_id', 'public',
+        'description', 'user_id', 'public', 'youtube_id',
     ];
 }
