@@ -53,5 +53,7 @@
     <script src="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/toastr.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-select/1.11.2/js/bootstrap-select.min.js"></script>
     <script src="{{ asset('js/child.js') }}"></script>
+    <script src='https://apis.google.com/js/api.js'></script>
+    <script src="{{ asset('js/youtube/auth.js') }}"></script>
     <script src="{{ asset('js/vue/dashboard.js') }}"></script>
 @stop

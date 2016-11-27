@@ -31,12 +31,14 @@ class VideoController extends Controller implements IController
 
     public function filterData($search)
     {
+        $user = Auth::guard('child')->user();
         $sql = 'select distinct(videos.id),
                 videos.description,
                 videos.url
             from videos
-                join categories on categories.id = videos.category_id
-                and categories.minimum_age <= :age';
+                join categories on categories.id = videos.category_id';
+        if ($user->restricted_mode === 'Y')
+            $sql.= ' and categories.minimum_age <= :age';
         if (isset($search)) {
             $sql.=' join tag_video on tag_video.video_id = videos.id
                     join tags on tags.id = tag_video.tag_id
@@ -44,7 +46,10 @@ class VideoController extends Controller implements IController
                     or tags.description like \'%:search%\'';
             $sql = str_replace(':search', $search, $sql);
         }
-        $videos = DB::select($sql, ['age' => $this->getYears()]);
+        if ($user->restricted_mode === 'Y')
+            $videos = DB::select($sql, ['age' => $this->getYears()]);
+        else
+            $videos = DB::select($sql);
         return $videos;
     }
 
