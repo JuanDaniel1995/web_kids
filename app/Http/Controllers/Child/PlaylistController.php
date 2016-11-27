@@ -23,20 +23,24 @@ class PlaylistController extends Controller implements IController
 
     public function filterData($search)
     {
-        $sql = 'select distinct(playlists.id),
-                playlists.description as playlist,
-                videos.description as video
-            from playlists
-                join playlist_video on playlist_video.playlist_id = playlists.id
-                join videos on videos.id = playlist_video.video_id
-                join categories on categories.id = videos.category_id
-                and categories.minimum_age <= :age';
+        $user = Auth::guard('child')->user();
+        $sql = 'select videos.description,
+                videos.url
+            from videos
+                join playlist_video on playlist_video.video_id = videos.id
+                join playlists on playlists.id = playlist_video.playlist_id
+                join categories on categories.id = videos.category_id';
+        if ($user->restricted_mode === 'Y')
+            $sql.= ' and categories.minimum_age <= :age';
         if (isset($search)) {
             $sql.=' where playlists.description like \'%:search%\'';
             $sql = str_replace(':search', $search, $sql);
         }
-        $playlists = DB::select($sql, ['age' => $this->getYears()]);
-        return $playlists;
+        if ($user->restricted_mode === 'Y')
+            $videos = DB::select($sql, ['age' => $this->getYears()]);
+        else
+            $videos = DB::select($sql);
+        return $videos;
     }
 
     private function getYears()

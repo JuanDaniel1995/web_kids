@@ -37,8 +37,8 @@
         <div class="container">
             <div class="row">
                 <h1 class="page-header text-center">{{trans('main.playlist')}}</h1>
-                    <div class="col-md-6 portfolio-item" v-cloak v-for="playlist in playlists">
-                        <h3>@{{playlist.playlist}}</h3>
+                    <div class="col-md-12 portfolio-item center-text">
+                        <div id="player"></div>
                     </div>
             </div>
         </div>
@@ -53,7 +53,5 @@
     <script src="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/toastr.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-select/1.11.2/js/bootstrap-select.min.js"></script>
     <script src="{{ asset('js/child.js') }}"></script>
-    <script src='https://apis.google.com/js/api.js'></script>
-    <script src="{{ asset('js/youtube/auth.js') }}"></script>
     <script src="{{ asset('js/vue/dashboard.js') }}"></script>
 @stop

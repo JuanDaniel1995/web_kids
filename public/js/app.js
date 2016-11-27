@@ -1,11 +1,11 @@
 function deleteUser(id) {
     if (confirm('¿Desea continuar?')) {
         $.ajax({
-        type: 'DELETE',
-        url: '/admin/users/' + id,
-        headers: {
-            'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
-        }
+            type: 'DELETE',
+            url: '/admin/users/' + id,
+            headers: {
+                'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+            }
         }).done(function(data) {
             window.location.reload();
         }).fail(function(data) {
@@ -17,11 +17,11 @@ function deleteUser(id) {
 function deleteChild(id) {
     if (confirm('¿Desea continuar?')) {
         $.ajax({
-        type: 'DELETE',
-        url: '/admin/children/' + id,
-        headers: {
-            'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
-        }
+            type: 'DELETE',
+            url: '/admin/children/' + id,
+            headers: {
+                'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+            }
         }).done(function(data) {
             window.location.reload();
         }).fail(function(data) {
@@ -33,11 +33,11 @@ function deleteChild(id) {
 function deleteCategory(id) {
     if (confirm('¿Desea continuar?')) {
         $.ajax({
-        type: 'DELETE',
-        url: '/admin/categories/' + id,
-        headers: {
-            'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
-        }
+            type: 'DELETE',
+            url: '/admin/categories/' + id,
+            headers: {
+                'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+            }
         }).done(function(data) {
             window.location.reload();
         }).fail(function(data) {
@@ -49,11 +49,11 @@ function deleteCategory(id) {
 function deleteTag(id) {
     if (confirm('¿Desea continuar?')) {
         $.ajax({
-        type: 'DELETE',
-        url: '/admin/tags/' + id,
-        headers: {
-            'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
-        }
+            type: 'DELETE',
+            url: '/admin/tags/' + id,
+            headers: {
+                'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+            }
         }).done(function(data) {
             window.location.reload();
         }).fail(function(data) {
@@ -65,11 +65,11 @@ function deleteTag(id) {
 function deleteVideo(id) {
     if (confirm('¿Desea continuar?')) {
         $.ajax({
-        type: 'DELETE',
-        url: '/admin/videos/' + id,
-        headers: {
-            'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
-        }
+            type: 'DELETE',
+            url: '/admin/videos/' + id,
+            headers: {
+                'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+            }
         }).done(function(data) {
             window.location.reload();
         }).fail(function(data) {
@@ -81,11 +81,11 @@ function deleteVideo(id) {
 function deletePlaylist(id) {
     if (confirm('¿Desea continuar?')) {
         $.ajax({
-        type: 'DELETE',
-        url: '/admin/playlists/' + id,
-        headers: {
-            'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
-        }
+            type: 'DELETE',
+            url: '/admin/playlists/' + id,
+            headers: {
+                'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+            }
         }).done(function(data) {
             window.location.reload();
         }).fail(function(data) {
@@ -98,11 +98,11 @@ function deletePlaylistVideo(id)
 {
     if (confirm('¿Desea continuar?')) {
         $.ajax({
-        type: 'DELETE',
-        url: '/admin/playlists_videos/' + id,
-        headers: {
-            'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
-        }
+            type: 'DELETE',
+            url: '/admin/playlists_videos/' + id,
+            headers: {
+                'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+            }
         }).done(function(data) {
             window.location.reload();
         }).fail(function(data) {
@@ -115,11 +115,11 @@ function deleteTagVideo(id)
 {
     if (confirm('¿Desea continuar?')) {
         $.ajax({
-        type: 'DELETE',
-        url: '/admin/tags_videos/' + id,
-        headers: {
-            'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
-        }
+            type: 'DELETE',
+            url: '/admin/tags_videos/' + id,
+            headers: {
+                'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+            }
         }).done(function(data) {
             window.location.reload();
         }).fail(function(data) {
@@ -132,11 +132,11 @@ function deleteChildPlaylist(id)
 {
     if (confirm('¿Desea continuar?')) {
         $.ajax({
-        type: 'DELETE',
-        url: '/admin/children_playlist/' + id,
-        headers: {
-            'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
-        }
+            type: 'DELETE',
+            url: '/admin/children_playlist/' + id,
+            headers: {
+                'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+            }
         }).done(function(data) {
             window.location.reload();
         }).fail(function(data) {

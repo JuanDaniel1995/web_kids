@@ -70,7 +70,7 @@
                         </div>
                     @endif
                     <div class="form-group input-group">
-                        <input id="search_playlists" type="text" class="form-control" placeholder="{{trans('main.searchPlaylists')}}" v-on:keyup.enter="filterPlaylists">
+                        <input id="search_playlists" type="text" class="form-control" placeholder="{{trans('main.searchPlaylists')}}" onkeypress="refreshPlaylist(event)">
                     </div>
                 </form>
             </div>
