@@ -30,7 +30,7 @@ function onYouTubeIframeAPIReady() {
         width: '640',
         playerVars:
         {
-            autoplay: 1,
+            autoplay: 0,
             controls: 1,
         },
         events: {
@@ -65,7 +65,7 @@ function getVideos(event) {
             videosId.push(videoId);
         });
         if (videosId.length > 0) {
-            event.target.loadPlaylist({
+            event.target.cuePlaylist({
                 playlist: videosId,
             });
         }

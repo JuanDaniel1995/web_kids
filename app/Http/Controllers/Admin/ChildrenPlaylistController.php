@@ -57,7 +57,11 @@ class ChildrenPlaylistController extends Controller implements IController
         $user = User::find(Auth::user()->id);
         $playlist = Playlist::find((int)$request->input('playlist_id'));
         $child = Child::find((int)$request->input('children_id'));
-        if ($playlist->user_id !== $user->id || $child->user_id !== $user->id) throw new AuthorizationException();
+        if ($playlist->user_id !== $user->id || $child->user_id !== $user->id) {
+            if ($playlist->public !== 'Y') {
+                throw new AuthorizationException();
+            }
+        }
         ChildrenPlaylist::create($request->all());
         return redirect(route('admin.children_playlist.index'));
     }
@@ -110,7 +114,11 @@ class ChildrenPlaylistController extends Controller implements IController
         $user = User::find(Auth::user()->id);
         $playlist = Playlist::find((int)$request->input('playlist_id'));
         $child = Child::find((int)$request->input('children_id'));
-        if ($playlist->user_id !== $user->id || $child->user_id !== $user->id) throw new AuthorizationException();
+        if ($playlist->user_id !== $user->id || $child->user_id !== $user->id) {
+                if ($playlist->public !== 'Y') {
+                throw new AuthorizationException();
+            }
+        }
         $item = ChildrenPlaylist::find($id);
         $item->update($request->all());
         return redirect(route('admin.children_playlist.index'));

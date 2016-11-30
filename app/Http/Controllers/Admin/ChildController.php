@@ -56,7 +56,7 @@ class ChildController extends Controller implements IController
         if ($user->role === Constants::PARENT_ROLE && (int)$request->input('user_id') !== $user->id) {
             throw new AuthorizationException();
         }
-        Child::create($request->all());
+        $this->save($request->all());
         return redirect(route('admin.children.index'));
     }
 
@@ -155,5 +155,17 @@ class ChildController extends Controller implements IController
             return false;
         }
         return true;
+    }
+
+    protected function save(array $data)
+    {
+        return Child::create([
+            'username' => $data['username'],
+            'password' => bcrypt($data['password']),
+            'birthdate' => $data['birthdate'],
+            'enabled_search' => $data['enabled_search'],
+            'restricted_mode' => $data['restricted_mode'],
+            'user_id' => $data['user_id'],
+        ]);
     }
 }
